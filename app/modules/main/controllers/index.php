@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Сибов Александр<sib@avantajprim.com>
+ * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 class Controller_Main_Index extends MLib_Controller_Frontend
 {

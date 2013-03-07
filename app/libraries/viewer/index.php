@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Сибов Александр<sib@avantajprim.com>
+ * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 include_once(PROJECT_BASE_PATH.'external/smarty/Smarty.class.php');
 
