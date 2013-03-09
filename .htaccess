@@ -1,7 +1,12 @@
 RewriteEngine On
 RewriteBase /
 
-RewriteRule ^public/ - [L]
+RewriteCond %{REQUEST_URI} \.(css|jpg|gif|png|zip|rar|doc|xls|js|tif|tiff|docx|xlsx|ico)$
+    RewriteRule ^(.*)$ $1 [L,QSA]
+
+RewriteCond %{REQUEST_URL} ^public/
+	RewriteRule ^(.*)$ $1 [L,QSA]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.php/ [QSA,L]
+RewriteRule . index.php/ [L,QSA]

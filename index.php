@@ -1,8 +1,5 @@
 <?php
-/**
- * Alexandr Sibov aka Cyber (cyberdelia1987@gmail.com)
- * Дата создания: 06.10.12 14:23
- */
+//phpinfo(); die;
 
 define('DS', DIRECTORY_SEPARATOR);
 define('PROJECT_BASE_PATH', dirname(realpath(__FILE__)).DS);

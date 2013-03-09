@@ -11,12 +11,34 @@ set_error_handler(array('Error_Handler', 'handleError'),E_ALL);
  */
 class Error_Handler
 {
-	static public function handleError($errno, $msg, $file, $line)
+	public function handleError($err_num, $err_str, $err_file, $err_line)
 	{
-		echo '<div>';
-		echo "Произошла ошибка:<b>$errno</b>!<br>";
-		echo "Файл: <tt>$file</tt>, строка $line.<br>";
-		echo "Текст ошибки: <i>$msg</i>";
-		echo "</div>";
+		if (!(error_reporting() & $err_num)) return false;
+
+		switch ($err_num)
+		{
+			case E_USER_ERROR:
+				echo "<b>My ERROR</b> [$err_num] $err_str<br />\n";
+				echo "  Фатальная ошибка в строке $err_line файла $err_file";
+				echo ", PHP " . PHP_VERSION . " (" . PHP_OS . ")<br />\n";
+				echo "Завершение работы...<br />\n";
+				exit(1);
+				break;
+
+			case E_USER_WARNING:
+				echo "<b>My WARNING</b> [$err_num] $err_str<br />\n";
+				break;
+
+			case E_USER_NOTICE:
+				echo "<b>My NOTICE</b> [$err_num] $err_str<br />\n";
+				break;
+
+			default:
+				echo "Неизвестная ошибка: [$err_num] $err_str<br />\n";
+				break;
+		}
+
+		/* Не запускаем внутренний обработчик ошибок PHP */
+		return true;
 	}
 }

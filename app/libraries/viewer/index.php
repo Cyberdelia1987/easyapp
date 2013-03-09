@@ -18,6 +18,10 @@ class MLib_Viewer extends Smarty
 		$this->setCacheDir(APP_PATH.'cache/smarty/cache/')
 			->setTemplateDir(APP_PATH.'view/')
 			->setCompileDir(APP_PATH.'cache/smarty/compile/');
+
+		$this->caching = 1;
+		$this->compile_check = true;
+		$this->muteExpectedErrors();
 	}
 
 	/**
