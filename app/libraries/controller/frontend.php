@@ -16,8 +16,6 @@ class MLib_Controller_Frontend
 
 	public function __construct()
 	{
-		$this->session = MLib_Session::getInstance();
-		$this->session->start();
 		$this->view = MLib_Viewer::getInstance();
 	}
 }

@@ -33,6 +33,9 @@ function first(array $array)
 	return false;
 }
 
+/**
+ * var_dump в pre
+ */
 function vre()
 {
 	$args = func_get_args();
@@ -48,6 +51,9 @@ function vre()
 	echo '</pre>';
 }
 
+/**
+ * var_dump в pre с die()
+ */
 function vred()
 {
 	$args = func_get_args();
@@ -62,4 +68,16 @@ function vred()
 	}
 	echo '</pre>';
 	die;
+}
+
+/**
+ * Проверка ан то, что модуль существует
+ * @param $module_name
+ * @return bool
+ */
+function module_exists($module_name)
+{
+	$path = APP_PATH.'modules'.DS.$module_name.DS;
+	if (is_dir($path)) return true;
+	return false;
 }

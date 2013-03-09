@@ -5,10 +5,19 @@
  */
 class MLib_Application
 {
+	/**
+	 * @var null
+	 */
 	static protected $_instance = null;
 
+	/**
+	 *
+	 */
 	protected function __construct() {}
 
+	/**
+	 * @return MLib_Application|null
+	 */
 	static public function getInstance()
 	{
 		if (self::$_instance == null)
@@ -26,8 +35,8 @@ class MLib_Application
 	{
 		try
 		{
-			$router = MLib_Router::getInstance();
-			$router->route();
+			MLib_Session::getInstance()->start();
+			MLib_Router::getInstance()->route();
 		}
 		catch(Exception $ex)
 		{
