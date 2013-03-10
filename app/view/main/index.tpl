@@ -4,8 +4,22 @@
 		<div class="span6 grey-block">
 			<h5>Вы можете загрузить новый файл для анализа, либо выбрать ранее загруженный файл из списка справа</h5>
 			<hr/>
-			<form id="upload-form" class="form-inline">
-				<label for="upload-file" style="margin-right: 10px;">Выберите файл для загрузки</label><input type="file" id="upload-file" style="width: 235px"/>
+			<form id="upload-form" class="form-inline" action="/decompose/upload/" method="post" enctype="multipart/form-data">
+				<table>
+					<tr>
+						<td>
+							<label for="upload-file" style="margin-right: 10px;">Выберите файл для загрузки</label>
+							<input type="file" id="upload-file" name="data_file" style="width: 235px"/>
+						</td>
+						<td>
+							<div class="controls right" style="text-align: right; margin-top: 10px;">
+								<button type="submit" class="btn btn-primary">Загрузить</button>
+							</div>
+						</td>
+					</tr>
+				</table>
+
+
 			</form>
 		</div>
 		<div class="span6 grey-block">

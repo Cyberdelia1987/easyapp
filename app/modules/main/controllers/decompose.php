@@ -9,4 +9,22 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 		$this->view->assign('lala', 'tralalalalaee');
 		$this->view->display('decompose/index.tpl');
 	}
+
+	public function upload()
+	{
+		$file_field = 'data_file';
+		$file_specs = setif($_FILES, $file_field);
+
+		if (!$file_specs)
+		{
+			throw new Exception('No file specified');
+		}
+
+		$file_path_from = $file_specs['tmp_name'];
+		$model = new Model_Main_Input_Files_Parse($file_path_from);
+		$data = $model->parse();
+
+		$model_storage = new Model_Main_Input_Files_Storage();
+		$model_storage->save($file_specs['name'], $data);
+	}
 }
