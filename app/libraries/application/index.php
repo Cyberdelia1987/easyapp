@@ -35,8 +35,11 @@ class MLib_Application
 	{
 		try
 		{
+			// Запускаем сессию
 			MLib_Session::getInstance()->start();
+			// Запускаем маршрутизацию
 			MLib_Router::getInstance()->route();
+			// Обработка вывода AJAX-данных, если инициализировались
 			MLib_Ajax::getInstance()->display();
 		}
 		catch(Exception $ex)

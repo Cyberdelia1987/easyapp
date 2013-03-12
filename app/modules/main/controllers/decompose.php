@@ -34,6 +34,7 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 		$model_storage = new Model_Main_Input_Files_Storage();
 		$model_storage->save($file_specs['name'], $data);
 
+		MLib_Router_Uri::redirect();
 		return MLib_Ajax::getInstance()->setSuccess('It\'s OK');
 	}
 }
