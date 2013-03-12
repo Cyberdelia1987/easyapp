@@ -23,7 +23,7 @@ class Model_Main_Input_Files_Storage
 	public function save($file_name, $content)
 	{
 		$this->_checkDir();
-		$hash = md5(microtime());
+		$hash = substr(md5(microtime()), 0, 6);
 		$file_name = $hash.'_'.str_replace(' ', '_', $file_name);
 		$fp = fopen($this->_files_dir.$file_name, 'a+');
 		fwrite($fp, serialize($content));
@@ -47,11 +47,30 @@ class Model_Main_Input_Files_Storage
 			if (sizeof($exploded) < 2) continue;
 
 			$hash = array_shift($exploded);
-			if (strlen($hash) != 32) continue;
+			if (strlen($hash) != 6) continue;
+
+			$file_info = stat($this->_files_dir.$entry);
+
+			$file_size = setif($file_info, 'size', 0);
+
+			if ($file_size > 1048576)
+			{
+				$file_size = round($file_size/1048576, 2).' mb';
+			}
+			elseif ($file_size > 1024)
+			{
+				$file_size = round($file_size/1024, 2).' kb';
+			}
+			else
+			{
+				$file_size = $file_size.' b';
+			}
 
 			$tmp[] = array(
 				'orig_file_name'	=> implode('_', $exploded),
-				'file_name'			=> $entry
+				'file_name'			=> $entry,
+				'modify_time'		=> date("Y-m-d H:i:s.", setif($file_info, 'mtime')),
+				'size'			=> $file_size
 			);
 		}
 
@@ -78,7 +97,10 @@ class Model_Main_Input_Files_Storage
 	{
 		if (!is_dir($this->_files_dir))
 		{
-			throw new MLib_Exception_BadUsage('Не найдена директория для записи/чтения файлов');
+			if (!mkdir($this->_files_dir, 0777, true))
+			{
+				throw new MLib_Exception_BadUsage('Не найдена директория для записи/чтения файлов');
+			}
 		}
 
 		if (!is_readable($this->_files_dir))

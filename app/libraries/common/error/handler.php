@@ -11,7 +11,7 @@ set_error_handler(array('Error_Handler', 'handleError'),E_ALL);
  */
 class Error_Handler
 {
-	public function handleError($err_num, $err_str, $err_file, $err_line)
+	static public function handleError($err_num, $err_str, $err_file, $err_line)
 	{
 		if (!(error_reporting() & $err_num)) return false;
 

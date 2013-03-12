@@ -27,10 +27,19 @@
 			<hr/>
 			<div class="well">
 				<ul class="nav nav-list file-list">
-					<li><a>Файл #1<span class="add-on"><i class="icon-remove"></i></span></a></li>
-					<li><a>Файл #2<span class="add-on"><i class="icon-remove"></i></span></a></li>
-					<li><a>Файл #3<span class="add-on"><i class="icon-remove"></i></span></a></li>
-					<li><a>Файл #4<span class="add-on"><i class="icon-remove"></i></span></a></li>
+					{if $uploaded_files && sizeof($uploaded_files)}
+						{foreach from=$uploaded_files item="file"}
+							<li>
+								<a href="/decompose/count/{$file.file_name}">
+									{$file.orig_file_name}
+									<span style="display: block; font-size: 70%; color: #333; ">{$file.modify_time} - {$file.size}</span>
+								</a>
+								<span class="add-on"><i class="icon-remove"></i></span>
+							</li>
+						{/foreach}
+					{else}
+						Вы не добавили ни одного файла для проведения рассчетов. Пожалуйста, загрузите файл со входными данными для проведения рассчетов.
+					{/if}
 				</ul>
 			</div>
 		</div>

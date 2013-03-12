@@ -37,6 +37,7 @@ class MLib_Application
 		{
 			MLib_Session::getInstance()->start();
 			MLib_Router::getInstance()->route();
+			MLib_Ajax::getInstance()->display();
 		}
 		catch(Exception $ex)
 		{

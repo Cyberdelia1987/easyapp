@@ -5,7 +5,7 @@
 	padding: 10px;
 }
 .file-list .add-on {
-	display: inline-block;
+	display: block;
 	width: 16px;
 	height: 16px;
 	padding: 2px;
@@ -17,11 +17,16 @@
 	background-color: #eeeeee;
 	border: 1px solid #ccc;
 	border-radius: 3px;
-	float: right;
+	position: absolute;
+	top: 25%;
+	right: 0;
 }
 .file-list .add-on:hover {
 	background: #ccc;
 	cursor: pointer;
+}
+.file-list li {
+	position: relative;
 }
 .file-list li a {
 	border: solid #ddd;

@@ -17,14 +17,23 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 
 		if (!$file_specs)
 		{
-			throw new Exception('No file specified');
+			return MLib_Ajax::getInstance()->setException(new MLib_Exception_BadUsage('No file specified'));
 		}
 
 		$file_path_from = $file_specs['tmp_name'];
 		$model = new Model_Main_Input_Files_Parse($file_path_from);
-		$data = $model->parse();
+		try
+		{
+			$data = $model->parse();
+		}
+		catch (MLib_Exception_Abstract $ex)
+		{
+			return MLib_Ajax::getInstance()->setException($ex);
+		}
 
 		$model_storage = new Model_Main_Input_Files_Storage();
 		$model_storage->save($file_specs['name'], $data);
+
+		return MLib_Ajax::getInstance()->setSuccess('It\'s OK');
 	}
 }
