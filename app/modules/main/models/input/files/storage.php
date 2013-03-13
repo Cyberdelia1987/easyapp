@@ -70,13 +70,37 @@ class Model_Main_Input_Files_Storage
 				'orig_file_name'	=> implode('_', $exploded),
 				'file_name'			=> $entry,
 				'modify_time'		=> date("Y-m-d H:i:s.", setif($file_info, 'mtime')),
-				'size'			=> $file_size
+				'size'				=> $file_size
 			);
 		}
 
 		return $tmp;
 	}
 
+	/**
+	 * Удаляем файл из хранилища физически
+	 * @param string $filename
+	 * @throws MLib_Exception_Abstract
+	 * @throws MLib_Exception_WrongArgument
+	 */
+	public function remove($filename)
+	{
+		$filename = $this->_files_dir.$filename;
+		if (!file_exists($filename))
+		{
+			throw new MLib_Exception_WrongArgument('Указанный файл не найден. Удаление не может быть произведено');
+		}
+
+		if (!unlink($filename))
+		{
+			throw new MLib_Exception_Abstract('Не удалось удалить файл: возможно, проблема с правами. Если у вас есть доступ к директории с файлами - попробуйте удалить файл самостоятельно');
+		}
+	}
+
+	/**
+	 * @param $file_name
+	 * @throws MLib_Exception_WrongArgument
+	 */
 	public function getFileObject($file_name)
 	{
 		$file_name = $this->_files_dir.$file_name;
@@ -85,8 +109,6 @@ class Model_Main_Input_Files_Storage
 		{
 			throw new MLib_Exception_WrongArgument('В директории нет указанного файла');
 		}
-
-
 	}
 
 	/**

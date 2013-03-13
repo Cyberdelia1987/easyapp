@@ -30,11 +30,12 @@
 					{if $uploaded_files && sizeof($uploaded_files)}
 						{foreach from=$uploaded_files item="file"}
 							<li>
+								<span class="file-icon icon-hdd"></span>
 								<a href="/decompose/count/{$file.file_name}">
 									{$file.orig_file_name}
 									<span style="display: block; font-size: 70%; color: #333; ">{$file.modify_time} - {$file.size}</span>
 								</a>
-								<span class="add-on"><i class="icon-remove"></i></span>
+								<span class="add-on" rel="{$file.file_name}"><i class="icon-remove"></i></span>
 							</li>
 						{/foreach}
 					{else}
@@ -44,4 +45,5 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="{public}js/scripts/main_page.js"></script>
 {include file='main/footer.tpl'}
