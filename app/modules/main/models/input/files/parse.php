@@ -41,12 +41,15 @@ class Model_Main_Input_Files_Parse
 		}
 
 		$data = array();
+		$previous_length = null;
+		$line_count = 0;
 
 		while (!feof($fp))
 		{
 			$line_array = fgetcsv($fp, 4096, '	');
 
 			if (!is_array($line_array) || !sizeof($line_array)) continue;
+			$line_count++;
 
 			foreach($line_array as $key => $cell_value)
 			{
@@ -55,6 +58,13 @@ class Model_Main_Input_Files_Parse
 					unset($line_array[$key]);
 				}
 			}
+
+			$current_length = sizeof($line_array);
+			if (!is_null($previous_length) && $previous_length != $current_length)
+			{
+				throw new MLib_Exception_WrongArgument('Количество элементов в строках исходного файла разное');
+			}
+			$previous_length = $current_length;
 
 			if (!sizeof($line_array)) continue;
 			$data[] = $line_array;
@@ -71,13 +81,17 @@ class Model_Main_Input_Files_Parse
 	 * - Объект заголовков всего этого дела (хотя, может, каждый столбец будет иметь свой заголовок)
 	 * @param $data
 	 * @return array|bool
+	 * @throws MLib_Exception_BadUsage
+	 * @throws MLib_Exception_WrongArgument
 	 */
 	protected function _switchArrayToObjects($data)
 	{
-		if (!sizeof($data)) return false;
+		if (!sizeof($data))
+		{
+			throw new MLib_Exception_BadUsage('В переданном файле нет данных для обработки. Файл пуст');
+		}
 
 		$captions = array_shift($data);
-
 		$tmp = array();
 
 		// Извлечение заголовков и создание объектов под каждый столбец с данными
@@ -94,6 +108,10 @@ class Model_Main_Input_Files_Parse
 		{
 			foreach ($line as $key => $cell_value)
 			{
+				if (!is_numeric($cell_value))
+				{
+					throw new MLib_Exception_WrongArgument('Значения столбцов, переданных в файле не являются числом. Обработка файла прекращена');
+				}
 				$object = $tmp[$key];
 				$object[] = $cell_value;
 			}

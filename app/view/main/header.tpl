@@ -6,9 +6,12 @@
 	<script type="text/javascript" src="{public}js/jquery/ui/js/jquery-ui-1.10.1.custom.min.js"></script>
 	<script type="text/javascript" src="{public}js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="{public}js/highcharts.js"></script>
+	<script type="text/javascript" src="{public}js/plugins/fileinput.js"></script>
+
 	<link href="{public}js/jquery/ui/css/smoothness/jquery-ui-1.10.1.custom.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="{public}css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="{public}css/styles.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="{public}css/fileinput.css" media="screen" rel="stylesheet" type="text/css" />
 	<!-- Подключение плагина Noty -->
 	<script type="text/javascript" src="{public}js/noty/jquery.noty.js"></script>
 	<script type="text/javascript" src="{public}js/noty/layouts/top.js"></script>
@@ -16,6 +19,7 @@
 	<script type="text/javascript" src="{public}js/noty/layouts/topRight.js"></script>
 	<script type="text/javascript" src="{public}js/noty/layouts/center.js"></script>
 	<script type="text/javascript" src="{public}js/noty/themes/default.js"></script>
+	<script type="text/javascript" src="{public}js/noty/defaults.js"></script>
 
 	<meta charset="utf-8" />
 </head>
