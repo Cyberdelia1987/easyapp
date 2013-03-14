@@ -20,7 +20,7 @@ $(document).ready(function(){
 			var RegExExt =/.*\.(.*)/;
 			var ext = fileTitle.replace(RegExExt, "$1");//и его расширение
 
-			if (ext){
+			if (ext) {
 				var file_icon = 'unknown';
 				switch (ext.toLowerCase())
 				{

@@ -5,7 +5,7 @@
 class Model_Main_Input_Files_Storage
 {
 	/**
-	 *
+	 * Путь к директории с файлами
 	 * @var string
 	 */
 	protected $_files_dir;
