@@ -2,7 +2,7 @@
 /**
  * @author Сибов Александр<sib@avantajprim.com>
  */
-class Lib_Main_Input_Serie extends Lib_Main_ArrayAccess
+class Lib_Main_Serie extends Lib_Main_ArrayAccess
 {
 	/**
 	 * Заголовок столбца
@@ -11,20 +11,14 @@ class Lib_Main_Input_Serie extends Lib_Main_ArrayAccess
 	protected $_caption = '';
 
 	/**
-	 * Объект значений по оси X
-	 * @var Lib_Main_Input_XAxis
-	 */
-	protected $_xaxis;
-
-	/**
 	 * Объект-делимое
-	 * @var Lib_Main_Input_Serie|null
+	 * @var Lib_Main_Serie|null
 	 */
 	protected $_numerator = null;
 
 	/**
 	 * Объект-делитель
-	 * @var Lib_Main_Input_Serie|null
+	 * @var Lib_Main_Serie|null
 	 */
 	protected $_denominator = null;
 
@@ -67,40 +61,14 @@ class Lib_Main_Input_Serie extends Lib_Main_ArrayAccess
 	}
 
 	/**
-	 * Установка объекта значений по оси X
-	 * @param Lib_Main_Input_XAxis $xaxis
-	 * @throws MLib_Exception_BadUsage
-	 * @return $this
-	 */
-	public function setXAxis(Lib_Main_Input_XAxis $xaxis)
-	{
-		if (!$xaxis instanceof Lib_Main_Input_XAxis)
-		{
-			throw new MLib_Exception_BadUsage('Передан неверный объект оси X');
-		}
-
-		$this->_xaxis = $xaxis;
-		return $this;
-	}
-
-	/**
-	 * Возвращает объект значений по оси X
-	 * @return Lib_Main_Input_XAxis
-	 */
-	public function getXAxis()
-	{
-		return $this->_xaxis;
-	}
-
-	/**
 	 * Установка объекта-делимого
-	 * @param Lib_Main_Input_Serie $serie
+	 * @param Lib_Main_Serie $serie
 	 * @throws MLib_Exception_BadUsage
 	 * @return $this
 	 */
-	public function setNumerator(Lib_Main_Input_Serie $serie)
+	public function setNumerator(Lib_Main_Serie $serie)
 	{
-		if (!$serie instanceof Lib_Main_Input_Serie)
+		if (!$serie instanceof Lib_Main_Serie)
 		{
 			throw new MLib_Exception_BadUsage('Передан неверный объект столбца даных');
 		}
@@ -111,7 +79,7 @@ class Lib_Main_Input_Serie extends Lib_Main_ArrayAccess
 
 	/**
 	 * Получение объекта-делимого
-	 * @return Lib_Main_Input_Serie|null
+	 * @return Lib_Main_Serie|null
 	 */
 	public function getNumerator()
 	{
@@ -120,13 +88,13 @@ class Lib_Main_Input_Serie extends Lib_Main_ArrayAccess
 
 	/**
 	 * Установка объекта-делителя
-	 * @param Lib_Main_Input_Serie $serie
+	 * @param Lib_Main_Serie $serie
 	 * @throws MLib_Exception_BadUsage
 	 * @return $this
 	 */
-	public function setDenominator(Lib_Main_Input_Serie $serie)
+	public function setDenominator(Lib_Main_Serie $serie)
 	{
-		if (!$serie instanceof Lib_Main_Input_Serie)
+		if (!$serie instanceof Lib_Main_Serie)
 		{
 			throw new MLib_Exception_BadUsage('Передан неверный объект столбца даных');
 		}
@@ -137,7 +105,7 @@ class Lib_Main_Input_Serie extends Lib_Main_ArrayAccess
 
 	/**
 	 * Получение объекта-делителя
-	 * @return Lib_Main_Input_Serie|null
+	 * @return Lib_Main_Serie|null
 	 */
 	public function getDenominator()
 	{

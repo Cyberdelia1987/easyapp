@@ -2,6 +2,6 @@
 /**
  * @author Сибов Александр<sib@avantajprim.com>
  */
-class Lib_Main_Input_XAxis extends Lib_Main_Input_Serie
+class Lib_Main_Serie_XAxis extends Lib_Main_Serie
 {
 }

@@ -10,6 +10,7 @@
 
 	<link href="{public}js/jquery/ui/css/smoothness/jquery-ui-1.10.1.custom.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="{public}css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="{public}css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="{public}css/styles.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="{public}css/fileinput.css" media="screen" rel="stylesheet" type="text/css" />
 	<!-- Подключение плагина Noty -->
@@ -22,6 +23,7 @@
 	<script type="text/javascript" src="{public}js/noty/defaults.js"></script>
 
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-static-top">

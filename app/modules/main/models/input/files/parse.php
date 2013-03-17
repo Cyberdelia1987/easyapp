@@ -97,7 +97,7 @@ class Model_Main_Input_Files_Parse
 		// Извлечение заголовков и создание объектов под каждый столбец с данными
 		foreach ($captions as $key => $value)
 		{
-			$object = ($key == 0) ? new Lib_Main_Input_XAxis() : new Lib_Main_Input_Serie();
+			$object = ($key == 0) ? new Lib_Main_Serie_XAxis() : new Lib_Main_Serie();
 			$object->setCaption($value);
 
 			$tmp[$key] = $object;
@@ -117,19 +117,19 @@ class Model_Main_Input_Files_Parse
 			}
 		}
 
-		/**
-		 * Устанавливаем объектам столбцов графика обект оси X
-		 */
 		$xAxis = array_shift($tmp);
 
+		$series_list = new Lib_Main_Serie_List();
+		$series_list->setXAxis($xAxis);
+
 		/**
-		 * @var Lib_Main_Input_Serie $serie_object
+		 * @var Lib_Main_Serie $serie_object
 		 */
 		foreach ($tmp as $serie_object)
 		{
-			$serie_object->setXAxis($xAxis);
+			$series_list[] = $serie_object;
 		}
 
-		return $tmp;
+		return $series_list;
 	}
 }

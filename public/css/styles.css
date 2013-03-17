@@ -9,22 +9,14 @@
 	right: 0;
 	top: 9px;
 }
-.file-list li {
-	position: relative;
-}
+.file-list li { position: relative; }
 .file-list li a {
 	border: solid #ddd;
 	border-width: 1px 0;
 	margin-top: -1px;
 }
-.file-list .file-icon {
-	float: left;
-	margin: 7px 5px 0 0;
-}
-.clearfix {
-	clear: both;
-	overflow: hidden;
-}
-.side-margins {
-	margin: 0 30px;
-}
+.file-list .file-icon { float: left; margin: 7px 5px 0 0; }
+.clearfix { clear: both; overflow: hidden; }
+.side-margins { margin: 0 30px; }
+.table-data { height: 600px; overflow: scroll; }
+.table-data .xAxis { background: #E0E0E0; }

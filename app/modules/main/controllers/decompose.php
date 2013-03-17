@@ -14,9 +14,8 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 		$file_name = urldecode($file_name);
 
 		$model = new Model_Main_Count_Input($file_name);
-		$model->display();
 
-		$this->view->assign('lala', 'tralalalalaee');
+		$this->view->assign('model_count_main', $model);
 		$this->view->display('decompose/index.tpl');
 	}
 }

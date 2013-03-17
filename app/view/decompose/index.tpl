@@ -2,7 +2,8 @@
 <div class="side-margins">
 	<div class="content">
 		<h1>Загрузите фсё:</h1>
-		{$lala}
+
+		{$model_count_main->display()}
 	</div>
 </div>
 {include file='main/footer.tpl'}
