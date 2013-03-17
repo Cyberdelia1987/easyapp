@@ -98,17 +98,21 @@ class Model_Main_Input_Files_Storage
 	}
 
 	/**
+	 * Возвращяет объект работы с файлом
 	 * @param $file_name
+	 * @return Lib_Main_Files_Text
 	 * @throws MLib_Exception_WrongArgument
 	 */
 	public function getFileObject($file_name)
 	{
 		$file_name = $this->_files_dir.$file_name;
 
-		if (!file_exists($file_name) || !is_real($file_name))
+		if (!file_exists($file_name) || !is_readable($file_name))
 		{
 			throw new MLib_Exception_WrongArgument('В директории нет указанного файла');
 		}
+
+		return new Lib_Main_Files_Text($file_name);
 	}
 
 	/**

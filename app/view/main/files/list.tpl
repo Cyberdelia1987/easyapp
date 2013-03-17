@@ -3,7 +3,7 @@
 		{foreach from=$uploaded_files item="file"}
 			<li>
 				<span class="file-icon icon-hdd"></span>
-				<a href="/decompose/count/{$file.file_name}">
+				<a href="/decompose/{$file.file_name}">
 					{$file.orig_file_name}
 					<span style="display: block; font-size: 70%; color: #333; ">{$file.modify_time} - {$file.size}</span>
 				</a>

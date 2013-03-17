@@ -1,4 +1,5 @@
 {include file='main/header.tpl'}
+<div class="container">
 	<h2>Этап 1: выбор или загрузка файла</h2><br/>
 	<div class="row-fluid nav">
 		<div class="span6 grey-block">
@@ -24,6 +25,7 @@
 		</div>
 		<div class="span6 grey-block">
 			<h5>Ранее загруженные файлы:</h5>
+			<p>Щелкните по названию файла для перехода к разложению</p>
 			<hr/>
 			<div class="well file-list">
 				{$list_model->get()}
@@ -31,4 +33,5 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="{public}js/scripts/main_page.js"></script>
+</div>
 {include file='main/footer.tpl'}

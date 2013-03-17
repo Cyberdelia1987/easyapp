@@ -117,6 +117,19 @@ class Model_Main_Input_Files_Parse
 			}
 		}
 
-		return array('xAxis' => array_shift($tmp), 'yAxis'	=> $tmp);
+		/**
+		 * Устанавливаем объектам столбцов графика обект оси X
+		 */
+		$xAxis = array_shift($tmp);
+
+		/**
+		 * @var Lib_Main_Input_Serie $serie_object
+		 */
+		foreach ($tmp as $serie_object)
+		{
+			$serie_object->setXAxis($xAxis);
+		}
+
+		return $tmp;
 	}
 }

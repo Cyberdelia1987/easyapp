@@ -25,3 +25,6 @@
 	clear: both;
 	overflow: hidden;
 }
+.side-margins {
+	margin: 0 30px;
+}
