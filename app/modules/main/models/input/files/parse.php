@@ -117,16 +117,28 @@ class Model_Main_Input_Files_Parse
 			}
 		}
 
+		/**
+		 * @var Lib_Main_Serie_XAxis $xAxis
+		 * @var Lib_Main_Serie $serie_object
+		 */
 		$xAxis = array_shift($tmp);
+
+		$is_direct = $xAxis->isDirectOrder();
+
+		if (!$is_direct)
+		{
+			$xAxis->reverse();
+		}
 
 		$series_list = new Lib_Main_Serie_List();
 		$series_list->setXAxis($xAxis);
 
-		/**
-		 * @var Lib_Main_Serie $serie_object
-		 */
 		foreach ($tmp as $serie_object)
 		{
+			if (!$is_direct)
+			{
+				$serie_object->reverse();
+			}
 			$series_list[] = $serie_object;
 		}
 

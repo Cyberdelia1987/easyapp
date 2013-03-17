@@ -41,13 +41,16 @@
 		});
 
 		tmp = $.extend(true, chartDefConfig, {
-			xAxis: {
-				categories: chart_data.xAxis.data
+			xAxis:{
+				categories:  chart_data.xAxis.data
 			},
 			series: tmp
 		});
 
-		chart = new Highcharts.StockChart(tmp);
+		console.log(chart_data.xAxis.data);
+		console.log(tmp);
+
+		chart = new Highcharts.Chart(tmp);
 	});
 {/literal}
 </script>

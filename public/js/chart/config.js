@@ -4,7 +4,7 @@
 var chartDefConfig = {
 	chart: {
 		renderTo: 'chart-display-main',
-		type: 'spline',
+		type: 'line',
 		zoomType: 'xy',
 		animation: false
 	},
@@ -13,18 +13,29 @@ var chartDefConfig = {
 		text: 'Исходные данные',
 		x: -20 //center
 	},
+	plotOptions : {
+		animation: false,
+		line :{
+			marker : {
+				enabled: false
+			},
+			states : {
+				marker: {
+					lineWidth: 1
+				}
+			}
+		}
+	},
 	xAxis: {
 		type: 'linear',
 		categories: [],
 		tickmarkPlacement: 'on',
 		title: { enabled: false },
-		maxzoom: 10,
-		showFirstLabel: true,
-		showLastLabel: true,
 		labels: {
-			formatter: function(){return this.value},
-			enabled: true
-		}
+			enabled: true,
+			step: 3
+		},
+		tickInterval: 10
 	},
 	yAxis: {
 		title: {
@@ -44,6 +55,10 @@ var chartDefConfig = {
 		x: -10,
 		y: 100,
 		borderWidth: 0
+	},
+	tooltip: {
+		shared: true,
+		crosshairs: true
 	},
 	rangeSelector: {
 		enabled: false

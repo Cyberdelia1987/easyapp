@@ -35,6 +35,23 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	}
 
 	/**
+	 * Установка данных
+	 * @param array $data
+	 */
+	public function setData(array $data)
+	{
+		$this->_data = $data;
+	}
+
+	/**
+	 * Реверс внутреннего массива данных
+	 */
+	public function reverse()
+	{
+		$this->_data = array_reverse($this->_data);
+	}
+
+	/**
 	 * Установка заголовка толбцу данных
 	 * @param $caption
 	 * @throws MLib_Exception_WrongArgument
