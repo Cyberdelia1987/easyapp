@@ -1,5 +1,5 @@
-.grey-block
-{
+body { font-size: 12px; }
+.grey-block {
 	background: #f6f6f6;
 	border: 1px solid #eee;
 	padding: 10px;
@@ -17,6 +17,10 @@
 }
 .file-list .file-icon { float: left; margin: 7px 5px 0 0; }
 .clearfix { clear: both; overflow: hidden; }
-.side-margins { margin: 0 30px; }
-.table-data { height: 600px; overflow: scroll; }
+.side-margins { margin: 0 30px; min-width: 1000px; }
+.table-data { height: 500px; overflow: scroll; }
 .table-data .xAxis { background: #E0E0E0; }
+.controls { height: 30px; padding: 10px 0; }
+.main-log { overflow: scroll; height: 200px; }
+.main-chart-wrapper { height: 500px; }
+.chart-block { height: 100%; width: 100%; }

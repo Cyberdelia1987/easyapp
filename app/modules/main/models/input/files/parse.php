@@ -113,7 +113,7 @@ class Model_Main_Input_Files_Parse
 					throw new MLib_Exception_WrongArgument('Значения столбцов, переданных в файле не являются числом. Обработка файла прекращена');
 				}
 				$object = $tmp[$key];
-				$object[] = $cell_value;
+				$object[] = floatval($cell_value);
 			}
 		}
 
