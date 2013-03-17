@@ -133,12 +133,15 @@ class Model_Main_Input_Files_Parse
 		$series_list = new Lib_Main_Serie_List();
 		$series_list->setXAxis($xAxis);
 
+		//$filter = new Model_Main_Filter_Calman(1, 1, 2, 15);
+
 		foreach ($tmp as $serie_object)
 		{
 			if (!$is_direct)
 			{
 				$serie_object->reverse();
 			}
+			//$serie_object->setData($filter->filter($serie_object->toArray()));
 			$series_list[] = $serie_object;
 		}
 
