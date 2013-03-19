@@ -49,7 +49,7 @@ function savePreferences()
 				text : data.response,
 				type : 'success'
 			});
-			$('.file-list').html(data.response.list)
+			$('#preferences-dialog').dialog('close');
 		} else if (data.result == 'error' || data.result == 'global_error') {
 			noty({
 				text : data.response,
