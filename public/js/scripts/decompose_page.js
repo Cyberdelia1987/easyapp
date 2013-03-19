@@ -25,49 +25,6 @@ $(document).ready(function() {
 			}
 		});
 	});
-
-
-
-
-	/**
-	 * Обработка загрузки файла
-	 */
-/*	$('#upload-form button[type="submit"]').click(function(event){
-		event.preventDefault();
-		var formData = new FormData($('#upload-form')[0]);
-
-		$.ajax({
-			url			: '/uploadFile/',
-			type		: 'POST',
-			data		: formData,
-			cache		: false,
-			contentType	: false,
-			processData	: false
-		}).done(function(data){
-				if (typeof(data.result) == 'undefined') {
-					noty({
-						text : 'Ошибка получения данных от сервера: неверный ответ: <br>'+data,
-						type: 'error'
-					});
-				} else if (data.result == 'success') {
-					noty({
-						text : data.response.message,
-						type : 'success'
-					});
-					$('.file-list').html(data.response.list)
-				} else if (data.result == 'error' || data.result == 'global_error') {
-					noty({
-						text : data.response,
-						type : 'error'
-					});
-				} else if (data.result == 'exception') {
-					noty({
-						text : data.response.message,
-						type : 'error'
-					});
-				}
-			});
-	});*/
 });
 
 function savePreferences()
@@ -82,27 +39,27 @@ function savePreferences()
 		contentType	: false,
 		processData	: false
 	}).done(function(data){
-			if (typeof(data.result) == 'undefined') {
-				noty({
-					text : 'Ошибка получения данных от сервера: неверный ответ: <br>'+data,
-					type: 'error'
-				});
-			} else if (data.result == 'success') {
-				noty({
-					text : data.response,
-					type : 'success'
-				});
-				$('.file-list').html(data.response.list)
-			} else if (data.result == 'error' || data.result == 'global_error') {
-				noty({
-					text : data.response,
-					type : 'error'
-				});
-			} else if (data.result == 'exception') {
-				noty({
-					text : data.response,
-					type : 'error'
-				});
-			}
-		});
+		if (typeof(data.result) == 'undefined') {
+			noty({
+				text : 'Ошибка получения данных от сервера: неверный ответ: <br>'+data,
+				type: 'error'
+			});
+		} else if (data.result == 'success') {
+			noty({
+				text : data.response,
+				type : 'success'
+			});
+			$('.file-list').html(data.response.list)
+		} else if (data.result == 'error' || data.result == 'global_error') {
+			noty({
+				text : data.response,
+				type : 'error'
+			});
+		} else if (data.result == 'exception') {
+			noty({
+				text : data.response,
+				type : 'error'
+			});
+		}
+	});
 }
