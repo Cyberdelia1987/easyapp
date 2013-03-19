@@ -3,6 +3,7 @@
 	<div class="content">
 		<div class="controls">
 			<button class="btn btn-primary">Рассчитать</button>
+			<button id="preferences-button" class="btn btn-inverse">Настройки</button>
 		</div>
 		<div class="tabs-container">
 			<div id="tabs">
@@ -22,6 +23,10 @@
 		</fieldset>
 	</div>
 </div>
+
+<div id="preferences-dialog" title="Настройки декомпозиции"></div>
+
+<script type="text/javascript" src="{public}js/scripts/decompose_page.js"></script>
 <script type="text/javascript">
 {literal}
 	$('#tabs').tabs();

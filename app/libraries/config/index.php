@@ -26,10 +26,10 @@ class MLib_Config
 
 	/**
 	 * Получение переменной из конфига модуля
-	 * @param        $module
-	 * @param        $variable
+	 * @param string $module
+	 * @param string $variable
 	 * @param string $file
-	 * @return bool
+	 * @return mixed
 	 */
 	static public function getModule($module, $variable, $file = 'config')
 	{

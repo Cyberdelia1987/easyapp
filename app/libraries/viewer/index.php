@@ -29,7 +29,7 @@ class MLib_Viewer extends Smarty
 	 */
 	static public function getInstance()
 	{
-		if (!static::$_viewer)
+		if (static::$_viewer === null)
 		{
 			static::$_viewer = new static();
 		}

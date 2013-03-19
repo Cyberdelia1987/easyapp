@@ -52,7 +52,7 @@ class MLib_Ajax
 	 * @param mixed $data
 	 * @return bool
 	 */
-	public function setSuccess($data)
+	public function setSuccess($data = false)
 	{
 		$this->_initAjax();
 		$this->_return['result'] = self::RESULT_SUCCESS;
@@ -112,6 +112,7 @@ class MLib_Ajax
 	public function display()
 	{
 		if (!$this->_ajax_mode) return;
+		ob_get_clean();
 		header('Content-type: application/json');
 		ob_start();
 		echo json_encode($this->_return);

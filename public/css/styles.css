@@ -24,3 +24,5 @@ body { font-size: 12px; }
 .main-log { overflow: scroll; height: 200px; }
 .main-chart-wrapper { height: 500px; }
 .chart-block { height: 100%; width: 100%; }
+.preferences-form .form-field { padding: 15px 0; border-bottom: 1px dashed #ccc; }
+.preferences-form .buttons { margin-top: 20px;}

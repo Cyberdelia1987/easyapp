@@ -6,7 +6,7 @@
 
 /**
  * Удобная обертка для isset
- * @param array  $array
+ * @param array|mixed  $array
  * @param string $elem
  * @param bool   $default
  * @return bool
