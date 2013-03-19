@@ -47,9 +47,6 @@
 			series: tmp
 		});
 
-		console.log(chart_data.xAxis.data);
-		console.log(tmp);
-
 		chart = new Highcharts.Chart(tmp);
 	});
 {/literal}

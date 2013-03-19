@@ -39,8 +39,9 @@ class Model_Main_Filter_Calman
 
 	/**
 	 * @param float $data
+	 * @param int $round
 	 */
-	protected function _correct($data)
+	protected function _correct($data, $round)
 	{
 		//time update - prediction
 		$this->_X0 = $this->_F*$this->_state;
@@ -50,21 +51,28 @@ class Model_Main_Filter_Calman
 		$K = $this->_H*$this->_P0/($this->_H*$this->_P0*$this->_H + $this->_R);
 		$this->_state = $this->_X0 + $K*($data - $this->_H*$this->_X0);
 		$this->_covariance = (1 - $K*$this->_H)*$this->_P0;
+
+		if ($round !== false)
+		{
+			$this->_state = round($this->_state, $round);
+			$this->_covariance = round($this->_covariance, $round);
+		}
 	}
 
 	/**
 	 * Метод фильтрации
 	 * @param array $data
 	 * @param float $init_covariance
+	 * @param int $round
 	 * @return array
 	 */
-	public function filter(array $data, $init_covariance = 0.1)
+	public function filter(array $data, $init_covariance = 0.1, $round = 5)
 	{
 		$tmp = array();
 		$this->_setState($data[0], $init_covariance);
 		foreach ($data as $key => $value)
 		{
-			$this->_correct($value);
+			$this->_correct($value, $round);
 			$tmp[$key] = $this->_state;
 		}
 

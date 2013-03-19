@@ -17,10 +17,28 @@ class Model_Main_Decompose_Preferences
 	 */
 	protected $_preferences_file_name = 'decompose_preferences.json';
 
+	protected $_ready = false;
+
+	protected static $_instance;
+
 	public function __construct()
 	{
 		$this->_config = MLib_Config::getModule('main', 'properties');
 		$this->_config = $this->getConfigFromSavedPreferences();
+	}
+
+	/**
+	 * Получение инстанции (иногда полезно)
+	 * @return Model_Main_Decompose_Preferences
+	 */
+	static public function getInstance()
+	{
+		if (self::$_instance === null)
+		{
+			self::$_instance = new self;
+		}
+
+		return self::$_instance;
 	}
 
 	/**
@@ -29,12 +47,19 @@ class Model_Main_Decompose_Preferences
 	 */
 	public function getConfigFromSavedPreferences()
 	{
+		if ($this->_ready)
+		{
+			return $this->_config;
+		}
+
 		$cache_obj = new MLib_Cache('main');
 		$cached = $cache_obj->readFile($this->_preferences_file_name, true);
 
 		if (!is_array($cached)) return $this->_config;
 
 		$tmp = $this->_config;
+
+		if (!$tmp) return array();
 
 		foreach ($tmp as $var => $value)
 		{
@@ -43,6 +68,8 @@ class Model_Main_Decompose_Preferences
 				$tmp[$var]['value'] = $cached[$var];
 			}
 		}
+
+		$this->_ready = true;
 
 		return $tmp;
 	}
@@ -76,5 +103,18 @@ class Model_Main_Decompose_Preferences
 	public function getList()
 	{
 		return new Lib_Main_Preferences_List($this->_config);
+	}
+
+	/**
+	 * Получение значения параметра
+	 * @param string $alias
+	 * @param bool $default
+	 * @return mixed
+	 */
+	public function getPrefValue($alias, $default = false)
+	{
+		$config = $this->getConfigFromSavedPreferences();
+
+		return setif((setif($config, $alias)), 'value', $default);
 	}
 }

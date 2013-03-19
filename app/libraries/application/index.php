@@ -49,6 +49,7 @@ class MLib_Application
 			echo '<br/>';
 			echo 'Бэктрейс:<br/>';
 			vre($ex->getTraceAsString());
+			die();
 		}
 	}
 

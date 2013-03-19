@@ -41,11 +41,9 @@ var chartDefConfig = {
 		title: {
 			text: 'Данные измерений'
 		},
-		plotLines: [{
-			value: 0,
-			width: 1,
-			color: '#808080'
-		}]
+		formatter: function() {
+			return this.value;
+		}
 	},
 	legend: {
 		enabled: true,
@@ -58,7 +56,14 @@ var chartDefConfig = {
 	},
 	tooltip: {
 		shared: true,
-		crosshairs: true
+		crosshairs: true,
+		formatter: function(){
+			var s = '<b>Ось X: '+ this.x +'</b>';
+			$.each(this.points, function(i, point) {
+				s += '<br/><span style="color:'+point.series.color+'; font-weight: bold;">'+ point.series.name +': </span> '+point.y;
+			});
+			return s;
+		}
 	},
 	rangeSelector: {
 		enabled: false

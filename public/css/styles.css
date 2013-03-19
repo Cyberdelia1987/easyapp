@@ -24,5 +24,9 @@ body { font-size: 12px; }
 .main-log { overflow: scroll; height: 200px; }
 .main-chart-wrapper { height: 500px; }
 .chart-block { height: 100%; width: 100%; }
-.preferences-form .form-field { padding: 15px 0; border-bottom: 1px dashed #ccc; }
-.preferences-form .buttons { margin-top: 20px;}
+.preferences-form .form-field { padding: 15px 0; border-bottom: 1px dashed #ccc; overflow: hidden; clear: both; }
+.preferences-form .buttons { margin-top: 20px; float: right; }
+.preferences-form .holder { float: left; }
+.preferences-form .label-holder { width: 60%; }
+.preferences-form .field-holder { text-align: center; width: 40%; }
+.ui-widget {font-size: 1em;}

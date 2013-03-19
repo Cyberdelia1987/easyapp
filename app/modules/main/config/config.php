@@ -5,12 +5,17 @@
  */
 $properties = array(
 	'spread_percent'	=> array(
-		'label'		=> '% допустимого разброса по оси Y для прямолинейного участка',
+		'label'		=> 'Максимальный разброс по прямой, % :',
 		'type'		=> 'text',
 		'value'		=> 2
 	),
+	'dots_per_jump'		=> array(
+		'label'		=> 'Погрешность, точек на скачок : ',
+		'type'		=> 'text',
+		'value'		=> 3
+	),
 	'enable_calman_filter'	=> array(
-		'label'		=> 'Использовать фильтр Калмана для деленных графиков',
+		'label'		=> 'Использовать фильтр Калмана при делении',
 		'type'		=> 'checkbox',
 		'value'		=> false
 	)

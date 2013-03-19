@@ -2,15 +2,15 @@
 <div class="side-margins">
 	<div class="content">
 		<div class="controls">
-			<button class="btn btn-primary">Рассчитать</button>
+			<button id="calculate-button" class="btn btn-primary">Рассчитать</button>
 			<button id="preferences-button" class="btn btn-inverse">Настройки</button>
 		</div>
 		<div class="tabs-container">
 			<div id="tabs">
-				<ul>
-					<li><a href="#tabs-1">Основные данные</a></li>
+				<ul class="tabs-list">
+					<li><a href="#tabs-0">Основные данные</a></li>
 				</ul>
-				<div id="tabs-1">
+				<div id="tabs-0">
 					{$model_count_main->display()}
 				</div>
 			</div>
@@ -29,7 +29,9 @@
 <script type="text/javascript" src="{public}js/scripts/decompose_page.js"></script>
 <script type="text/javascript">
 {literal}
-	$('#tabs').tabs();
+	$(document).ready(function(){
+		$('#tabs').tabs();
+	});
 {/literal}
 </script>
 {include file='main/footer.tpl'}

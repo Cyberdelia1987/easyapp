@@ -61,6 +61,7 @@ class MLib_Session
 		foreach ($index_array as $key => $index)
 		{
 			if ($key == sizeof($index_array) - 1) break;
+
 			$this->_checkIndex($index);
 
 			if (!isset($session_elem[$index]))

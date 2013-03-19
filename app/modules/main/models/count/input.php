@@ -17,10 +17,15 @@ class Model_Main_Count_Input
 	protected $_series_list;
 
 	/**
+	 * Инстанс вьюера
 	 * @var MLib_Viewer
 	 */
 	protected $_view;
 
+	/**
+	 * Конструктор
+	 * @param string $file_name
+	 */
 	public function __construct($file_name)
 	{
 		$this->_file_name = $file_name;
@@ -35,9 +40,22 @@ class Model_Main_Count_Input
 		$this->_series_list = $this->_getObjectsArray();
 		$this->_prepareJson();
 
+		$this->_saveToSession();
+
 		$this->_view->assign('series_list', $this->_series_list);
 
 		return $this->_view->fetch('decompose/view_main.tpl');
+	}
+
+	/**
+	 * Сохранение объектов в сессию
+	 */
+	protected function _saveToSession()
+	{
+		$session = MLib_Session::getInstance();
+		$session->remove('decompose');
+
+		$session->set('decompose.0', $this->_series_list);
 	}
 
 	/**

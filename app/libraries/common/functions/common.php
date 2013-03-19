@@ -11,7 +11,7 @@
  * @param bool   $default
  * @return bool
  */
-function setif(array $array, $elem = '', $default = false)
+function setif($array, $elem = '', $default = false)
 {
 	return isset($array[$elem]) ? $array[$elem] : $default;
 }
@@ -19,7 +19,7 @@ function setif(array $array, $elem = '', $default = false)
 /**
  * Метод получения первого элемента массива
  * @param array $array
- * @return bool
+ * @return mixed|bool
  */
 function first(array $array)
 {

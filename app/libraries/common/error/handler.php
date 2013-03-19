@@ -38,6 +38,8 @@ class Error_Handler
 				break;
 		}
 
+		echo 'Файл: ['.$err_line.'] '.$err_file.'<br>'.PHP_EOL;
+
 		/* Не запускаем внутренний обработчик ошибок PHP */
 		return true;
 	}
