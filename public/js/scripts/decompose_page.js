@@ -104,6 +104,8 @@ $(document).ready(function() {
 				var list_elem = $('<li><a href="#tabs-'+data.response.step+'">Шаг #'+data.response.step+'</a></li>');
 				$('.tabs-list').append(list_elem);
 				tabs_container.tabs("destroy").tabs();
+
+				$('.main-log').append(data.response.log);
 			}
 			else if (data.result == 'error' || data.result == 'global_error')
 			{

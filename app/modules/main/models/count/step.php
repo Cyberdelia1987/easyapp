@@ -69,6 +69,14 @@ class Model_Main_Count_Step
 	}
 
 	/**
+	 * @return Lib_Main_Serie_List
+	 */
+	public function getSeriesList()
+	{
+		return $this->_series_list;
+	}
+
+	/**
 	 * Рассчет данных по столбцам
 	 */
 	protected function _countSeries()
@@ -98,11 +106,13 @@ class Model_Main_Count_Step
 				->setCaption('f'.$key.sprintf("%''".$this->getStep()."s",  ''))
 				->setNumerator($serie)
 				->setDenominator($first_serie)
-				->divide($filter)
+				->divide()
 				->analyzeLineParts(
 					Model_Main_Decompose_Preferences::getInstance()->getPrefValue('spread_percent'),
 					Model_Main_Decompose_Preferences::getInstance()->getPrefValue('dots_per_jump')
-				);
+				)
+				->excludeDenominator()
+				->filter($filter);
 			$series_list[] = $new_serie;
 		}
 

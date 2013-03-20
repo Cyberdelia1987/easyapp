@@ -137,13 +137,12 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 
 	/**
 	 * Деление объекта-делителя на объект-делимое и возврат объекта данных
-	 * @param Model_Main_Filter_Calman|bool $filter	- Использовать ли фильтр Калмана для фильтрации деления
 	 * @throws MLib_Exception_BadUsage
 	 * @throws MLib_Exception_WrongArgument
 	 * @return $this
 	 */
 
-	public function divide($filter = false)
+	public function divide()
 	{
 		if (sizeof($this->_numerator) != sizeof($this->_denominator))
 		{
@@ -155,17 +154,13 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 			$this[] = round($value / $this->_denominator[$key], 5);
 		}
 
-		if ($filter instanceof Model_Main_Filter_Calman)
-		{
-			$this->_data = $filter->filter($this->_data);
-		}
-
 		return $this;
 	}
 
 	/**
 	 * @param float $max_spread_percent
 	 * @param int $max_dots_per_jump
+	 * @return $this
 	 */
 	public function analyzeLineParts($max_spread_percent, $max_dots_per_jump)
 	{
@@ -222,29 +217,39 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 
 		$line_parts = $this->_sortLinearParts($line_parts);
 		$this->_linear_parts = $line_parts;
+
+		return $this;
 	}
 
 	/**
-	 * Сортировка по убыванию
-	 * @param $line_parts
-	 * @return mixed
+	 * Вычитание из числителя знаменателя, помноженного на значение самого длинного линейного коэффициента
+	 * @return $this
 	 */
-	protected function _sortLinearParts($line_parts)
+	public function excludeDenominator()
 	{
-		foreach (array_keys($line_parts) as $key1 )
+		$coef = $this->getLongestLinePartValue();
+
+		foreach (array_keys($this->_data) as $key)
 		{
-			foreach(array_keys($line_parts) as $key2)
-			{
-				if ($line_parts[$key1]['count'] > $line_parts[$key2]['count'])
-				{
-					$tmp = $line_parts[$key1];
-					$line_parts[$key1] = $line_parts[$key2];
-					$line_parts[$key2] = $tmp;
-				}
-			}
+			$this->_data[$key] = $coef * $this->_denominator[$key] - $this->_numerator[$key];
 		}
 
-		return $line_parts;
+		return $this;
+	}
+
+	/**
+	 * Фильтровать результат
+	 * @param Model_Main_Filter_Calman|bool $filter	- Использовать ли фильтр Калмана для фильтрации деления
+	 * @return $this
+	 */
+	public function filter($filter = false)
+	{
+		if ($filter instanceof Model_Main_Filter_Calman)
+		{
+			$this->_data = $filter->filter($this->_data);
+		}
+
+		return $this;
 	}
 
 	/**
@@ -275,5 +280,28 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 		}
 
 		return setif(setif($this->_linear_parts, 0), 'value');
+	}
+
+	/**
+	 * Сортировка по убыванию
+	 * @param $line_parts
+	 * @return mixed
+	 */
+	protected function _sortLinearParts($line_parts)
+	{
+		foreach (array_keys($line_parts) as $key1 )
+		{
+			foreach(array_keys($line_parts) as $key2)
+			{
+				if ($line_parts[$key1]['count'] > $line_parts[$key2]['count'])
+				{
+					$tmp = $line_parts[$key1];
+					$line_parts[$key1] = $line_parts[$key2];
+					$line_parts[$key2] = $tmp;
+				}
+			}
+		}
+
+		return $line_parts;
 	}
 }
