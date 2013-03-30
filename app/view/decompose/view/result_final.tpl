@@ -11,7 +11,6 @@
 				{foreach from=$series_list item="serie"}
 					<th style="text-align: center">
 						{$serie->getCaption()}<br/>
-						<span style="font-weight: normal; font-size: 11px;">({$serie->getNumerator()->getCaption()} / {$serie->getDenominator()->getCaption()})</span>
 					</th>
 				{/foreach}
 			</tr>

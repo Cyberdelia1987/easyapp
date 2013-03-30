@@ -59,7 +59,7 @@ class Autoloader
 				return false;
 		}
 
-		$file_path = self::$_file_path.implode('/', array_map('strtolower', $class_path)).'.php';
+		$file_path = self::$_file_path.implode(DS, array_map('strtolower', $class_path)).'.php';
 
 		if (is_file($file_path) && is_readable($file_path))
 		{
@@ -68,7 +68,7 @@ class Autoloader
 			return true;
 		}
 
-		$file_path = self::$_file_path.implode('/', array_map('strtolower', $class_path)).'/index.php';
+		$file_path = self::$_file_path.implode(DS, array_map('strtolower', $class_path)).DS.'index.php';
 		if (is_file($file_path) && is_readable($file_path))
 		{
 			require_once($file_path);
@@ -85,7 +85,7 @@ class Autoloader
 	 */
 	protected static function _includeMainLib(&$path_array)
 	{
-		self::$_file_path .= 'app/libraries/';
+		self::$_file_path .= 'app'.DS.'libraries'.DS;
 	}
 
 	/**
@@ -94,7 +94,7 @@ class Autoloader
 	 */
 	protected static function _includeMainModel(&$path_array)
 	{
-		self::$_file_path .= 'app/models/';
+		self::$_file_path .= 'app'.DS.'models'.DS;
 	}
 
 	/**
@@ -104,18 +104,18 @@ class Autoloader
 	 */
 	protected static function _includeModule(&$path_array)
 	{
-		self::$_file_path .= 'app/modules/';
+		self::$_file_path .= 'app'.DS.'modules'.DS;
 		if (!is_array($path_array) && !empty($path_array)) return false;
 
 		$module_name = strtolower(array_shift($path_array));
-		self::$_file_path .= $module_name.'/';
+		self::$_file_path .= $module_name.DS;
 
 		$submodule_path = strtolower(first($path_array));
 
-		if (is_dir(self::$_file_path.$submodule_path.'/') && !in_array($submodule_path, self::$_reserved_names))
+		if (is_dir(self::$_file_path.$submodule_path.DS) && !in_array($submodule_path, self::$_reserved_names))
 		{
 			array_shift($path_array);
-			self::$_file_path .= $submodule_path.'/';
+			self::$_file_path .= $submodule_path.DS;
 		}
 		return true;
 	}
@@ -128,7 +128,7 @@ class Autoloader
 	protected static function _includeModelLib(&$path_array)
 	{
 		self::_includeModule($path_array);
-		self::$_file_path .= 'libraries/';
+		self::$_file_path .= 'libraries'.DS;
 	}
 
 	/**
@@ -139,7 +139,7 @@ class Autoloader
 	protected static function _includeModuleModel(&$path_array)
 	{
 		self::_includeModule($path_array);
-		self::$_file_path .= 'models/';
+		self::$_file_path .= 'models'.DS;
 	}
 
 	/**
@@ -150,13 +150,13 @@ class Autoloader
 	protected static function _includeModuleFasade(&$path_array)
 	{
 		self::_includeModule($path_array);
-		self::$_file_path .= 'fasade/';
+		self::$_file_path .= 'fasade'.DS;
 	}
 
 	protected static function _includeModuleRoutine(&$path_array)
 	{
 		self::_includeModule($path_array);
-		self::$_file_path .= 'routines/';
+		self::$_file_path .= 'routines'.DS;
 	}
 
 	/**
@@ -165,6 +165,6 @@ class Autoloader
 	protected static function _includeModuleController(&$path_array)
 	{
 		self::_includeModule($path_array);
-		self::$_file_path .= 'controllers/';
+		self::$_file_path .= 'controllers'.DS;
 	}
 }

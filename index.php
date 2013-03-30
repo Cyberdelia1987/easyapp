@@ -1,6 +1,8 @@
 <?php
 //phpinfo(); die;
 
+error_reporting(E_ALL | E_STRICT);
+
 define('DS', DIRECTORY_SEPARATOR);
 define('PROJECT_BASE_PATH', dirname(realpath(__FILE__)).DS);
 define('APP_PATH', PROJECT_BASE_PATH.'app/');

@@ -79,7 +79,7 @@ class MLib_Session
 	 * Ключ может быть многоуровневым. Уровни разделяются знаком '.'
 	 * Разрешенные символы в названии ключа - [a-zA-Z0-9_-]
 	 * @param $index
-	 * @return bool
+	 * @return mixed
 	 */
 	public function get($index)
 	{

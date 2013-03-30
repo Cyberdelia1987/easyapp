@@ -111,7 +111,7 @@ class Model_Main_Decompose_Preferences
 	 * @param bool $default
 	 * @return mixed
 	 */
-	public function getPrefValue($alias, $default = false)
+	public function getValue($alias, $default = false)
 	{
 		$config = $this->getConfigFromSavedPreferences();
 

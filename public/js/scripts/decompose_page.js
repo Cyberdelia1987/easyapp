@@ -79,9 +79,14 @@ $(document).ready(function() {
 		$('#preferences-dialog').dialog('close');
 	});
 
+	/**
+	 * Клик на кнопку "Рассчитать"
+	 */
 	$('#calculate-button').click(function(event) {
 		event.preventDefault();
-		if (!can_continue) return false;
+
+		if (!can_continue) return;
+
 		$.ajax('/decompose/getNext/').done(function(data) {
 			if (typeof(data.result) == 'undefined')
 			{
@@ -106,6 +111,11 @@ $(document).ready(function() {
 				tabs_container.tabs("destroy").tabs();
 
 				$('.main-log').append(data.response.log);
+
+				if (!data.response.can_continue)
+				{
+					getFinalData();
+				}
 			}
 			else if (data.result == 'error' || data.result == 'global_error')
 			{
@@ -122,3 +132,45 @@ $(document).ready(function() {
 		});
 	});
 });
+
+/**
+ * Рассчет и получение конечных данных
+ */
+function getFinalData() {
+	$.ajax('/decompose/getRevert').done(function(data) {
+		if (typeof(data.result) == 'undefined')
+		{
+			noty({
+				text : 'Ошибка получения данных от сервера: неверный ответ: <br>'+data,
+				type: 'error'
+			});
+		} else if (data.result == 'success') {
+			can_continue = data.response.can_continue;
+
+			var tabs_container = $('#tabs');
+			noty({
+				text : data.response.message,
+				type : 'success'
+			});
+
+			var html = $('<div id="tabs-'+data.response.step+'"></div>');
+			html.html(data.response.html);
+			tabs_container.append(html);
+			var list_elem = $('<li><a href="#tabs-'+data.response.step+'">Конечные рассчеты</a></li>');
+			$('.tabs-list').append(list_elem);
+			tabs_container.tabs("destroy").tabs();
+		}
+		else if (data.result == 'error' || data.result == 'global_error')
+		{
+			noty({
+				text : data.response,
+				type : 'error'
+			});
+		} else if (data.result == 'exception') {
+			noty({
+				text : data.response,
+				type : 'error'
+			});
+		}
+	});
+}

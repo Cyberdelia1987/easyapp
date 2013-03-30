@@ -96,7 +96,7 @@ class Model_Main_Count_Step
 			if ($key == 0) continue;
 
 			$filter = false;
-			if (Model_Main_Decompose_Preferences::getInstance()->getPrefValue('enable_calman_filter'))
+			if (Model_Main_Decompose_Preferences::getInstance()->getValue('enable_calman_filter'))
 			{
 				$filter = new Model_Main_Filter_Calman(1, 1, 2, 15);
 			}
@@ -108,9 +108,8 @@ class Model_Main_Count_Step
 				->setDenominator($first_serie)
 				->divide()
 				->analyzeLineParts(
-					Model_Main_Decompose_Preferences::getInstance()->getPrefValue('spread_percent'),
-					Model_Main_Decompose_Preferences::getInstance()->getPrefValue('dots_per_jump')
-				)
+					Model_Main_Decompose_Preferences::getInstance()->getValue('spread_percent'),
+					Model_Main_Decompose_Preferences::getInstance()->getValue('dots_per_jump'))
 				->excludeDenominator()
 				->filter($filter);
 			$series_list[] = $new_serie;

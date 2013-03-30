@@ -13,7 +13,7 @@ class Error_Handler
 {
 	static public function handleError($err_num, $err_str, $err_file, $err_line)
 	{
-		if (!(error_reporting() & $err_num)) return false;
+		//if (!(error_reporting() & $err_num)) return false;
 
 		switch ($err_num)
 		{
@@ -41,6 +41,6 @@ class Error_Handler
 		echo 'Файл: ['.$err_line.'] '.$err_file.'<br>'.PHP_EOL;
 
 		/* Не запускаем внутренний обработчик ошибок PHP */
-		return true;
+		return false;
 	}
 }
