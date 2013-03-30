@@ -5,7 +5,9 @@ $(document).ready(function() {
 	 * Загрузка настроек с сервера
 	 */
 	$('#preferences-button').click(function(){
+		$('.ajax-loader').show();
 		$.ajax('/preferences/get').done(function(data){
+			$('.ajax-loader').hide();
 			if (typeof(data.result) == 'undefined') {
 				noty({
 					text : 'Ошибка получения данных от сервера: неверный ответ',
@@ -37,7 +39,7 @@ $(document).ready(function() {
 	preferencesDialog.on('click', '#save-preferences', function(event) {
 		event.preventDefault();
 		var formData = new FormData($('#preferences-form')[0]);
-
+		$('.ajax-loader').show();
 		$.ajax({
 			url			: '/preferences/set/',
 			type		: 'POST',
@@ -46,6 +48,7 @@ $(document).ready(function() {
 			contentType	: false,
 			processData	: false
 		}).done(function(data){
+			$('.ajax-loader').hide();
 			if (typeof(data.result) == 'undefined') {
 				noty({
 					text : 'Ошибка получения данных от сервера: неверный ответ: <br>'+data,
@@ -86,8 +89,9 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		if (!can_continue) return;
-
+		$('.ajax-loader').show();
 		$.ajax('/decompose/getNext/').done(function(data) {
+			$('.ajax-loader').hide();
 			if (typeof(data.result) == 'undefined')
 			{
 				noty({
@@ -137,7 +141,9 @@ $(document).ready(function() {
  * Рассчет и получение конечных данных
  */
 function getFinalData() {
+	$('.ajax-loader').show();
 	$.ajax('/decompose/getRevert').done(function(data) {
+		$('.ajax-loader').hide();
 		if (typeof(data.result) == 'undefined')
 		{
 			noty({

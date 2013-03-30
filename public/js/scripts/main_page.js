@@ -13,7 +13,9 @@ $(document).ready(function() {
 				addClass: 'btn btn-primary',
 				text: 'Да',
 				onClick: function() {
+					$('.ajax-loader').show();
 					$.ajax('/removeFile/'+elem.attr('rel')).done(function(data){
+						$('.ajax-loader').hide();
 						if (typeof(data.result) == 'undefined') {
 							noty({
 								text : 'Ошибка получения данных от сервера: неверный ответ',
@@ -49,6 +51,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		var formData = new FormData($('#upload-form')[0]);
 
+		$('.ajax-loader').show();
 		$.ajax({
 			url			: '/uploadFile/',
 			type		: 'POST',
@@ -57,6 +60,7 @@ $(document).ready(function() {
 			contentType	: false,
 			processData	: false
 		}).done(function(data){
+			$('.ajax-loader').hide();
 			if (typeof(data.result) == 'undefined') {
 				noty({
 					text : 'Ошибка получения данных от сервера: неверный ответ: <br>'+data,
