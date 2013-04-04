@@ -75,7 +75,7 @@ class Model_Main_Count_Revert
 				{
 					$value -= $list[$j][$key];
 				}
-				$serie[$key] = round($value / $coef, 4);
+				$serie[$key] = round($value / $coef, 5);
 			}
 
 			$list[$i] = $serie;

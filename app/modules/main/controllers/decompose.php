@@ -35,6 +35,7 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 		}
 
 		$this->view->assign('list', $model->getSeriesList());
+		//$this->view->assign('mediate_list', $model->getMediateList());
 
 		return MLib_Ajax::getInstance()->setSuccess(array(
 			'message'		=> 'Данные шага вычисления #'.$model->getStep().' успешно получены',

@@ -29,6 +29,11 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	protected $_linear_parts = null;
 
 	/**
+	 * @var Lib_Main_Serie_List
+	 */
+	protected $_list;
+
+	/**
 	 * Конструктор
 	 * @param null $data
 	 */
@@ -38,6 +43,16 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 		{
 			$this->_data = $data;
 		}
+	}
+
+	/**
+	 * @param Lib_Main_Serie_List $list
+	 * @return $this
+	 */
+	public function setList(Lib_Main_Serie_List $list)
+	{
+		$this->_list = $list;
+		return $this;
 	}
 
 	/**
@@ -231,7 +246,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 
 		foreach (array_keys($this->_data) as $key)
 		{
-			$this->_data[$key] = $coef * $this->_denominator[$key] - $this->_numerator[$key];
+			$this->_data[$key] = round($coef * $this->_denominator[$key] - $this->_numerator[$key], 5);
 		}
 
 		return $this;
@@ -279,7 +294,24 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 			throw new MLib_Exception_BadUsage('Сначала линейные участки надо рассчитать');
 		}
 
-		return setif(setif($this->_linear_parts, 0), 'value');
+		if ($serie = setif($this->_list, 0))
+		{
+			$line_parts = $serie->getLineParts();
+			$etalon = $line_parts[0];
+			foreach ($this->_linear_parts as $line_part)
+			{
+				if (($line_part['start'] >= $etalon['start'] && $line_part['start'] <= $etalon['end']) || ($line_part['end'] >= $etalon['start'] && $line_part['end'] <= $etalon['end']))
+				{
+					return $line_part['value'];
+				}
+			}
+		}
+		else
+		{
+			return setif(setif($this->_linear_parts, 0), 'value');
+		}
+
+		return 1;
 	}
 
 	/**

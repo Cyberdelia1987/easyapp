@@ -14,6 +14,9 @@
 						<span style="font-weight: normal; font-size: 11px;">({$serie->getNumerator()->getCaption()} / {$serie->getDenominator()->getCaption()})</span>
 					</th>
 				{/foreach}
+				{foreach from=$mediate_list item="serie" key="key"}
+					<th style="text-align: center">Деление {$key+1}</th>
+				{/foreach}
 			</tr>
 			</thead>
 			<tbody>
@@ -21,6 +24,9 @@
 				<tr>
 					<td class="xAxis">{$xAxisValue}</td>
 					{foreach from=$series_list item="serie"}
+						<td>{$serie.$key}</td>
+					{/foreach}
+					{foreach from=$mediate_list item="serie"}
 						<td>{$serie.$key}</td>
 					{/foreach}
 				</tr>
@@ -32,13 +38,26 @@
 <script type="text/javascript" src="{public}js/chart/config.js"></script>
 <script type="text/javascript">
 	var chart_data{$model->getStep()} = {$chart_data};
+	var mediate_data{$model->getStep()} = {$mediate_data};
+
 	{literal}
 	var chart{/literal}{$model->getStep()}{literal};
 	$(document).ready(function() {
 		var tmp = [];
+		var a = 0;
 		$(chart_data{/literal}{$model->getStep()}{literal}.series).each(function(i){
 			tmp[i] = {
 				name: this.caption,
+				data: this.data
+			};
+			a = i;
+		});
+
+		a++;
+
+		$(mediate_data{/literal}{$model->getStep()}{literal}.series).each(function(j){
+			tmp[j+a] = {
+				name: 'Деление '+(j+1),
 				data: this.data
 			};
 		});
@@ -57,6 +76,7 @@
 
 		// Очистка переменной
 		delete window.chart_data{/literal}{$model->getStep()}{literal};
+		delete window.mediate_data{/literal}{$model->getStep()}{literal};
 	});
 	{/literal}
 </script>
