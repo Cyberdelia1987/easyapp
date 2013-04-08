@@ -122,6 +122,12 @@ class Model_Main_Count_Revert
 		);
 		$tmp['series'] = array();
 
+		// Добавляем к рядам обратного рассчета первый ряд из измеренных значений
+		$tmp['series'][] = array(
+			'caption'	=> $this->_session->get('decompose.0.0')->getCaption(),
+			'data'		=> $this->_session->get('decompose.0.0')->toArray()
+		);
+
 		foreach ($this->_series_list->toArray() as $serie)
 		{
 			$tmp['series'][] = array(

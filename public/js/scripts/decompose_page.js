@@ -112,7 +112,8 @@ $(document).ready(function() {
 				tabs_container.append(html);
 				var list_elem = $('<li><a href="#tabs-'+data.response.step+'">Шаг #'+data.response.step+'</a></li>');
 				$('.tabs-list').append(list_elem);
-				tabs_container.tabs("destroy").tabs();
+
+				tabs_container.tabs("destroy").tabs({active: $('.tabs-list li').length - 1});
 
 				$('.main-log').append(data.response.log);
 
@@ -164,7 +165,7 @@ function getFinalData() {
 			tabs_container.append(html);
 			var list_elem = $('<li><a href="#tabs-'+data.response.step+'">Конечные рассчеты</a></li>');
 			$('.tabs-list').append(list_elem);
-			tabs_container.tabs("destroy").tabs();
+			tabs_container.tabs("destroy").tabs({active: $('.tabs-list li').length - 1});
 		}
 		else if (data.result == 'error' || data.result == 'global_error')
 		{
