@@ -1,7 +1,7 @@
 <?php
 /**
  * Краткое описание назначения класса
- * @author Сибов Александр<sib@avantajprim.com>
+ * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 class Lib_Main_Preferences_List extends Lib_Main_ArrayAccess
 {

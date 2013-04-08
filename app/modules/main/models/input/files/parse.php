@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Сибов Александр<sib@avantajprim.com>
+ * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 class Model_Main_Input_Files_Parse
 {

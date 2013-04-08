@@ -1,7 +1,7 @@
 <?php
 /**
  * Краткое описание назначения класса
- * @author Сибов Александр<sib@avantajprim.com>
+ * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 class MLib_Ajax
 {
@@ -14,6 +14,15 @@ class MLib_Ajax
 	protected $_ajax_mode = false;
 
 	/**
+	 * Возвращаемый массив
+	 * @var array
+	 */
+	protected $_return = array(
+		'result'		=> self::RESULT_UNDEFINED,
+		'response'		=> false
+	);
+
+	/**
 	 * Константы возвращаемого результата
 	 */
 	const RESULT_UNDEFINED		= 'undefined';
@@ -23,16 +32,10 @@ class MLib_Ajax
 	const RESULT_EXCEPTION		= 'exception';
 
 	/**
-	 *
+	 * Конструктор
 	 */
 	protected function __construct()
-	{
-	}
-
-	protected $_return = array(
-		'result'		=> self::RESULT_UNDEFINED,
-		'response'		=> false
-	);
+	{}
 
 	/**
 	 * Получеие синглтона AJAX'а
@@ -101,19 +104,22 @@ class MLib_Ajax
 		return true;
 	}
 
+	/**
+	 * Инициальный метод
+	 */
 	protected function _initAjax()
 	{
 		$this->_ajax_mode = true;
 	}
 
 	/**
-	 *
+	 * Отдача данных
 	 */
 	public function display()
 	{
 		if (!$this->_ajax_mode) return;
-		ob_get_clean();
 		header('Content-type: application/json');
+		ob_get_clean();
 		ob_start();
 		echo json_encode($this->_return);
 		ob_end_flush();

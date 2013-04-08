@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Сибов Александр<sib@avantajprim.com>
+ * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 class Model_Main_Count_Revert
 {
@@ -66,6 +66,11 @@ class Model_Main_Count_Revert
 			$bear_serie = $bear_serie[0];
 			$coef = $i != 0 ? $bear_serie->getLongestLinePartValue() : 1;
 
+			if ($i != 0)
+			{
+				$coef = $coef - $bear_serie->getNextLinePartValue();
+			}
+
 			$serie = new Lib_Main_Serie();
 			$serie->setCaption('Reverse #'.$i);
 
@@ -75,7 +80,7 @@ class Model_Main_Count_Revert
 				{
 					$value -= $list[$j][$key];
 				}
-				$serie[$key] = round($value / $coef, 5);
+				$serie[$key] = $coef == 0 ? 0 : round($value / $coef, 5);
 			}
 
 			$list[$i] = $serie;

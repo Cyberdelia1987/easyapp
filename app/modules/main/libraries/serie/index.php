@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Сибов Александр<sib@avantajprim.com>
+ * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 class Lib_Main_Serie extends Lib_Main_ArrayAccess
 {
@@ -164,9 +164,22 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 			throw new MLib_Exception_WrongArgument('Количество данных в делимом столбце не равно количеству данных в столбце-делителе');
 		}
 
+		$prev_value = $this->_denominator[0] == 0 ? 0 : round($this->_numerator[0] / $this->_denominator[0], 5);
+
 		foreach ($this->_numerator as $key=>$value)
 		{
-			$this[] = round($value / $this->_denominator[$key], 5);
+			$tmp = $this->_denominator[$key] == 0 ? 0 : round($value / $this->_denominator[$key], 5);
+
+			if (abs(($tmp - $prev_value) / $prev_value) > 50)
+			{
+				$tmp = $prev_value;
+			}
+			else
+			{
+				$prev_value = $tmp;
+			}
+
+			$this[] = $tmp;
 		}
 
 		return $this;
@@ -192,7 +205,8 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 			'average'	=> reset($this->_data),
 			'start'		=> 0,
 			'end'		=> null,
-			'count'		=> 0
+			'count'		=> 0,
+			'selected'	=> false
 		);
 
 		$jumped = 0;
@@ -220,7 +234,8 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 					'average'	=> $value,
 					'start'		=> $key,
 					'end'		=> null,
-					'count'		=> 0
+					'count'		=> 0,
+					'selected'	=> false
 				);
 			}
 		}
@@ -298,17 +313,39 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 		{
 			$line_parts = $serie->getLineParts();
 			$etalon = $line_parts[0];
-			foreach ($this->_linear_parts as $line_part)
+			foreach ($this->_linear_parts as $key =>$line_part)
 			{
 				if (($line_part['start'] >= $etalon['start'] && $line_part['start'] <= $etalon['end']) || ($line_part['end'] >= $etalon['start'] && $line_part['end'] <= $etalon['end']))
 				{
-					return $line_part['value'];
+					$this->_linear_parts[$key]['selected'] = true;
+					return $line_part['average'];
 				}
 			}
 		}
 		else
 		{
-			return setif(setif($this->_linear_parts, 0), 'value');
+			$this->_linear_parts[0]['selected']	= true;
+			return setif(setif($this->_linear_parts, 0), 'average');
+		}
+
+		return 1;
+	}
+
+	/**
+	 * @return int
+	 * @throws MLib_Exception_BadUsage
+	 */
+	public function getNextLinePartValue()
+	{
+		if ($this->_linear_parts === null)
+		{
+			throw new MLib_Exception_BadUsage('Сначала линейные участки надо рассчитать');
+		}
+
+		foreach ($this->_linear_parts as $val)
+		{
+			if ($val['selected'] == true) continue;
+			return $val['average'];
 		}
 
 		return 1;
