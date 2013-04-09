@@ -21,6 +21,8 @@
 	<script type="text/javascript" src="{public}js/noty/layouts/center.js"></script>
 	<script type="text/javascript" src="{public}js/noty/themes/default.js"></script>
 	<script type="text/javascript" src="{public}js/noty/defaults.js"></script>
+	<script type="text/javascript" src="{public}js/jquery/widgets/ajaxRequest.js"></script>
+
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">

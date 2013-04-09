@@ -4,6 +4,7 @@
 		<div class="controls">
 			<button id="calculate-button" class="btn btn-primary">Рассчитать</button>
 			<button id="preferences-button" class="btn btn-inverse">Настройки</button>
+			<button class="btn btn-primary" style="float: right;" onclick="window.location.reload();">Очистить данные вычислений</button>
 		</div>
 		<div class="tabs-container">
 			<div id="tabs">

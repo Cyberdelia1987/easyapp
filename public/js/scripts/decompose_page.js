@@ -1,19 +1,18 @@
 var can_continue = true;
+
+/**
+ * Основная обработка событий
+ */
 $(document).ready(function() {
 	var preferencesDialog = $('#preferences-dialog');
 	/**
 	 * Загрузка настроек с сервера
 	 */
 	$('#preferences-button').click(function(){
-		$('.ajax-loader').show();
-		$.ajax('/preferences/get').done(function(data){
-			$('.ajax-loader').hide();
-			if (typeof(data.result) == 'undefined') {
-				noty({
-					text : 'Ошибка получения данных от сервера: неверный ответ',
-					type : 'error'
-				});
-			} else if (data.result == 'success') {
+		// Обработка запроса при клике на кнопку показа окна настроек
+		$(this).ajaxRequest({
+			url: '/preferences/get',
+			onSuccess : function(data) {
 				noty({
 					text : 'Настройки успешно получены с сервера',
 					type : 'success'
@@ -24,13 +23,9 @@ $(document).ready(function() {
 					width: 600,
 					height: 450
 				});
-			} else if (data.result == 'error' || data.result == 'global_error' || data.result == 'exception') {
-				noty({
-					text : data.response,
-					type : 'error'
-				})
 			}
 		});
+		$(this).ajaxRequest('query');
 	});
 
 	/**
@@ -39,39 +34,18 @@ $(document).ready(function() {
 	preferencesDialog.on('click', '#save-preferences', function(event) {
 		event.preventDefault();
 		var formData = new FormData($('#preferences-form')[0]);
-		$('.ajax-loader').show();
-		$.ajax({
-			url			: '/preferences/set/',
-			type		: 'POST',
-			data		: formData,
-			cache		: false,
-			contentType	: false,
-			processData	: false
-		}).done(function(data){
-			$('.ajax-loader').hide();
-			if (typeof(data.result) == 'undefined') {
-				noty({
-					text : 'Ошибка получения данных от сервера: неверный ответ: <br>'+data,
-					type: 'error'
-				});
-			} else if (data.result == 'success') {
+		$(this).ajaxRequest({
+			url: '/preferences/set/',
+			data: formData,
+			onSuccess: function(data) {
 				noty({
 					text : data.response,
 					type : 'success'
 				});
 				$('#preferences-dialog').dialog('close');
-			} else if (data.result == 'error' || data.result == 'global_error') {
-				noty({
-					text : data.response,
-					type : 'error'
-				});
-			} else if (data.result == 'exception') {
-				noty({
-					text : data.response,
-					type : 'error'
-				});
 			}
 		});
+		$(this).ajaxRequest('query');
 	});
 
 	/**
@@ -87,71 +61,84 @@ $(document).ready(function() {
 	 */
 	$('#calculate-button').click(function(event) {
 		event.preventDefault();
-
-		if (!can_continue) return;
-		$('.ajax-loader').show();
-		$.ajax('/decompose/getNext/').done(function(data) {
-			$('.ajax-loader').hide();
-			if (typeof(data.result) == 'undefined')
-			{
-				noty({
-					text : 'Ошибка получения данных от сервера: неверный ответ: <br>'+data,
-					type: 'error'
-				});
-			} else if (data.result == 'success') {
-				can_continue = data.response.can_continue;
-
-				var tabs_container = $('#tabs');
-				noty({
-					text : data.response.message,
-					type : 'success'
-				});
-
-				var html = $('<div id="tabs-'+data.response.step+'"></div>');
-				html.html(data.response.html);
-				tabs_container.append(html);
-				var list_elem = $('<li><a href="#tabs-'+data.response.step+'">Шаг #'+data.response.step+'</a></li>');
-				$('.tabs-list').append(list_elem);
-
-				tabs_container.tabs("destroy").tabs({active: $('.tabs-list li').length - 1});
-
-				$('.main-log').append(data.response.log);
-
-				if (!data.response.can_continue)
-				{
-					getFinalData();
-				}
-			}
-			else if (data.result == 'error' || data.result == 'global_error')
-			{
-				noty({
-					text : data.response,
-					type : 'error'
-				});
-			} else if (data.result == 'exception') {
-				noty({
-					text : data.response,
-					type : 'error'
-				});
-			}
-		});
+		getNextStep();
 	});
 });
+
+/**
+ * Получение следующего шага расчета
+ */
+function getNextStep()
+{
+	if (!can_continue) return;
+	var button = $('#calculate-button');
+	button.ajaxRequest({
+		url: '/decompose/getNext/',
+		onSuccess: function(data) {
+			can_continue = data.response.can_continue;
+
+			var tabs_container = $('#tabs');
+			noty({
+				text : data.response.message,
+				type : 'success'
+			});
+
+			var html = $('<div id="tabs-'+data.response.step+'"></div>');
+			html.html(data.response.html);
+			tabs_container.append(html);
+			var list_elem = $('<li><a href="#tabs-'+data.response.step+'">Шаг #'+data.response.step+'</a></li>');
+			$('.tabs-list').append(list_elem);
+
+			tabs_container.tabs("destroy").tabs({active: $('.tabs-list li').length - 1});
+
+			$('.main-log').append(data.response.log);
+
+			if (!data.response.can_continue) {
+				getFinalData();
+			} else {
+				confirmNextStep();
+			}
+		}
+	});
+	button.ajaxRequest('query');
+}
+
+/**
+ * Подтверждение следующего шага разложения
+ */
+function confirmNextStep()
+{
+	var confirm = noty({
+		text: 'Продолжить разложение?',
+		layout: 'center',
+		type: 'information',
+		modal: true,
+		buttons:  [{
+			addClass: 'btn btn-primary',
+			text: 'Да',
+			onClick: function() {
+				getNextStep();
+				confirm.close();
+			}
+		}, {
+			addClass: 'btn btn-danger',
+			text: 'Нет',
+			onClick: function() {
+				getFinalData();
+				confirm.close();
+			}
+		}]
+	});
+}
 
 /**
  * Рассчет и получение конечных данных
  */
 function getFinalData() {
-	$('.ajax-loader').show();
-	$.ajax('/decompose/getRevert').done(function(data) {
-		$('.ajax-loader').hide();
-		if (typeof(data.result) == 'undefined')
-		{
-			noty({
-				text : 'Ошибка получения данных от сервера: неверный ответ: <br>'+data,
-				type: 'error'
-			});
-		} else if (data.result == 'success') {
+	var tabs = $('#tabs');
+	tabs.ajaxRequest({
+		url: '/decompose/getRevert',
+		onSuccess: function(data) {
 			can_continue = data.response.can_continue;
 
 			var tabs_container = $('#tabs');
@@ -167,17 +154,6 @@ function getFinalData() {
 			$('.tabs-list').append(list_elem);
 			tabs_container.tabs("destroy").tabs({active: $('.tabs-list li').length - 1});
 		}
-		else if (data.result == 'error' || data.result == 'global_error')
-		{
-			noty({
-				text : data.response,
-				type : 'error'
-			});
-		} else if (data.result == 'exception') {
-			noty({
-				text : data.response,
-				type : 'error'
-			});
-		}
 	});
+	tabs.ajaxRequest('query');
 }
