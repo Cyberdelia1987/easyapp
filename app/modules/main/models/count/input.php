@@ -37,7 +37,15 @@ class Model_Main_Count_Input
 	 */
 	public function display()
 	{
-		$this->_series_list = $this->_getObjectsArray();
+		try
+		{
+			$this->_series_list = $this->_getObjectsArray();
+		}
+		catch (MLib_Exception_Abstract $ex)
+		{
+			MLib_Router_Uri::redirect();
+		}
+
 		$this->_prepareJson();
 
 		$this->_saveToSession();
