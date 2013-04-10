@@ -45,10 +45,10 @@ class Model_Main_Filter_Calman
 	{
 		//time update - prediction
 		$this->_X0 = $this->_F*$this->_state;
-		$this->_P0 = $this->_F*$this->_covariance*$this->_F + $this->_Q;
+		$this->_P0 = pow($this->_F, 2)*$this->_covariance + $this->_Q;
 
 		//measurement update - correction
-		$K = $this->_H*$this->_P0/($this->_H*$this->_P0*$this->_H + $this->_R);
+		$K = $this->_H*$this->_P0/(pow($this->_H, 2)*$this->_P0 + $this->_R);
 		$this->_state = $this->_X0 + $K*($data - $this->_H*$this->_X0);
 		$this->_covariance = (1 - $K*$this->_H)*$this->_P0;
 

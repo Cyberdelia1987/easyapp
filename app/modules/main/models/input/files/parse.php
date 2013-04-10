@@ -53,7 +53,7 @@ class Model_Main_Input_Files_Parse
 
 			foreach($line_array as $key => $cell_value)
 			{
-				if (empty($cell_value))
+				if (empty($cell_value) && !is_numeric($cell_value))
 				{
 					unset($line_array[$key]);
 				}

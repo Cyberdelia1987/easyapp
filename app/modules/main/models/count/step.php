@@ -131,7 +131,8 @@ class Model_Main_Count_Step
 
 			$mediate_list[] = clone $new_serie;
 
-			$new_serie->excludeDenominator()
+			$new_serie
+				->excludeDenominator()
 				->filter($filter);
 			$series_list[] = $new_serie;
 		}

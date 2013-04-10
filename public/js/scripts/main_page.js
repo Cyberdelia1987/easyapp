@@ -44,10 +44,13 @@ $(document).ready(function() {
 		uploadForm.ajaxRequest({
 			url: '/uploadFile/',
 			data: formData,
-			onSuccess: function(data) {
+			onSuccess		: function(data) {
 				noty({text : data.response.message, type : 'success'});
 				$('.file-list').html(data.response.list);
-			}
+			},
+			onError			: function(data) { noty({text : data.response.message, type : 'error'}); },
+			onGlobalError	: function(data) { noty({text : data.response.message, type : 'error'}); },
+			onException		: function(data) { noty({text : data.response.message, type : 'error'}); }
 		});
 		uploadForm.ajaxRequest('query');
 	});
