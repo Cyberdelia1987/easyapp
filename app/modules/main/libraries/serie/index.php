@@ -322,13 +322,9 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 				}
 			}
 		}
-		else
-		{
-			$this->_linear_parts[0]['selected']	= true;
-			return setif(setif($this->_linear_parts, 0), 'average');
-		}
 
-		return 1;
+		$this->_linear_parts[0]['selected'] = true;
+		return $this->_linear_parts[0]['average'];
 	}
 
 	/**
