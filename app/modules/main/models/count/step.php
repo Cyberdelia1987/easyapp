@@ -113,9 +113,9 @@ class Model_Main_Count_Step
 			if ($key == 0) continue;
 
 			$filter = false;
-			if (Model_Main_Decompose_Preferences::getInstance()->getValue('enable_calman_filter'))
+			if (Model_Main_Decompose_Preferences::getInstance()->getValue('enable_peack_filtering'))
 			{
-				$filter = new Model_Main_Filter_Calman(1, 1, 2, 15);
+				$filter = new Lib_Main_Filter_Peak(array('points' => 7));
 			}
 
 			$new_serie = new Lib_Main_Serie();
@@ -127,7 +127,8 @@ class Model_Main_Count_Step
 				->divide()
 				->analyzeLineParts(
 					Model_Main_Decompose_Preferences::getInstance()->getValue('spread_percent'),
-					Model_Main_Decompose_Preferences::getInstance()->getValue('dots_per_jump'));
+					Model_Main_Decompose_Preferences::getInstance()->getValue('dots_per_jump'))
+				->filter($filter);
 
 			$mediate_list[] = clone $new_serie;
 

@@ -274,7 +274,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	 */
 	public function filter($filter = false)
 	{
-		if ($filter instanceof Model_Main_Filter_Calman)
+		if ($filter instanceof Lib_Main_Filter_Abstract)
 		{
 			$this->_data = $filter->filter($this->_data);
 		}

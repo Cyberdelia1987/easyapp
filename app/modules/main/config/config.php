@@ -14,8 +14,8 @@ $properties = array(
 		'type'		=> 'text',
 		'value'		=> 3
 	),
-	'enable_calman_filter'	=> array(
-		'label'		=> 'Использовать фильтр Калмана при делении',
+	'enable_peack_filtering'	=> array(
+		'label'		=> 'Использовать фильтрацию пиков (экспериментально)',
 		'type'		=> 'checkbox',
 		'value'		=> false
 	)
