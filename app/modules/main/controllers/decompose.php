@@ -15,7 +15,17 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 
 		$model = new Model_Main_Count_Input($file_name);
 
+		try
+		{
+			$display_data = $model->display();
+		}
+		catch (MLib_Exception_Abstract $ex)
+		{
+			return MLib_Router_Uri::redirect();
+		}
+
 		$this->view->assign('model_count_main', $model);
+		$this->view->assign('display_data', $display_data);
 		$this->view->display('decompose/index.tpl');
 	}
 

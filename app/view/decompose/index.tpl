@@ -12,7 +12,7 @@
 					<li><a href="#tabs-0">Основные данные</a></li>
 				</ul>
 				<div id="tabs-0">
-					{$model_count_main->display()}
+					{$display_data}
 				</div>
 			</div>
 		</div>
