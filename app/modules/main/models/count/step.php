@@ -113,9 +113,9 @@ class Model_Main_Count_Step
 			if ($key == 0) continue;
 
 			$filter = false;
-			if (Model_Main_Decompose_Preferences::getInstance()->getValue('enable_peack_filtering'))
+			if (Model_Main_Decompose_Preferences::getInstance()->getValue('enable_savitsky_golay_filter'))
 			{
-				$filter = new Lib_Main_Filter_Peak(array('points' => 7));
+				$filter = new Lib_Main_Filter_SavGolay(array('points' => Model_Main_Decompose_Preferences::getInstance()->getValue('filter_points_count')));
 			}
 
 			$new_serie = new Lib_Main_Serie();
