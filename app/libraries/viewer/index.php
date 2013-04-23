@@ -4,7 +4,7 @@
  */
 include_once(PROJECT_BASE_PATH.'external/smarty/Smarty.class.php');
 
-class MLib_Viewer extends Smarty
+class MLib_Viewer extends Smarty implements MLib_Base_Singleton_Interface
 {
 	/**
 	 * @var MLib_Viewer
@@ -27,7 +27,7 @@ class MLib_Viewer extends Smarty
 	/**
 	 * @return MLib_Viewer
 	 */
-	static public function getInstance()
+	static public function instance()
 	{
 		if (static::$_viewer === null)
 		{
@@ -42,6 +42,6 @@ class MLib_Viewer extends Smarty
 	 */
 	public function view($path)
 	{
-		echo($this->getInstance()->fetch($path));
+		echo($this->instance()->fetch($path));
 	}
 }

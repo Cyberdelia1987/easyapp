@@ -3,14 +3,8 @@
  * Author: Alexandr Sibov aka "Cyber"
  * Created: 08.10.12 23:52
  */
-class MLib_Router
+class MLib_Router extends MLib_Base_Singleton
 {
-	/**
-	 * Инстанция маршрутизатора
-	 * @var null
-	 */
-	static protected $_instance = null;
-
 	/**
 	 * Сегменты строки запроса (без учета _GET-параметров)
 	 * @var array
@@ -49,20 +43,6 @@ class MLib_Router
 
 		$this->_segments = $segments;
     }
-
-	/**
-	 * Получение инстанции маршрутизатора
-	 * @return MLib_Router
-	 */
-	static public function getInstance()
-	{
-		if (self::$_instance === null)
-		{
-			self::$_instance = new MLib_Router();
-		}
-
-		return self::$_instance;
-	}
 
 	/**
 	 *
@@ -158,5 +138,8 @@ class MLib_Router
 		return $this->_right_segments;
 	}
 
-	final protected function __clone() {}
+	public function getPath()
+	{
+		return '/'.implode('/', $this->getRoute()+$this->getRightSegments());
+	}
 }

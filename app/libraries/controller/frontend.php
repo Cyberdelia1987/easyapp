@@ -16,6 +16,6 @@ class MLib_Controller_Frontend
 
 	public function __construct()
 	{
-		$this->view = MLib_Viewer::getInstance();
+		$this->view = MLib_Viewer::instance();
 	}
 }

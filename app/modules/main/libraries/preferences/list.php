@@ -46,7 +46,7 @@ class Lib_Main_Preferences_List extends Lib_Main_ArrayAccess
 			$form_fields .= $preference_field_object->display();
 		}
 
-		MLib_Viewer::getInstance()->assign('form_fields', $form_fields);
-		return MLib_Viewer::getInstance()->fetch('decompose/view/preferences.tpl');
+		MLib_Viewer::instance()->assign('form_fields', $form_fields);
+		return MLib_Viewer::instance()->fetch('decompose/view/preferences.tpl');
 	}
 }

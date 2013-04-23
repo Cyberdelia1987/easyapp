@@ -13,5 +13,5 @@ require_once(APP_PATH.'libraries/common/functions/common.php');
 require_once(APP_PATH.'libraries/common/autoload.php');
 require_once(APP_PATH.'libraries/common/error/handler.php');
 
-$application = MLib_Application::getInstance();
+$application = MLib_Application::instance();
 $application->run();

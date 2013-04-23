@@ -29,7 +29,7 @@ class Model_Main_Count_Input
 	public function __construct($file_name)
 	{
 		$this->_file_name = $file_name;
-		$this->_view = MLib_Viewer::getInstance();
+		$this->_view = MLib_Viewer::instance();
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Model_Main_Count_Input
 	 */
 	protected function _saveToSession()
 	{
-		$session = MLib_Session::getInstance();
+		$session = MLib_Session::instance();
 		$session->remove('decompose');
 
 		$session->set('decompose.0', $this->_series_list);

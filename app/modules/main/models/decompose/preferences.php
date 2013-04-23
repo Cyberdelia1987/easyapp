@@ -3,7 +3,7 @@
  * Краткое описание назначения класса
  * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
-class Model_Main_Decompose_Preferences
+class Model_Main_Decompose_Preferences extends MLib_Base_Singleton
 {
 	/**
 	 * Массив конфига
@@ -19,26 +19,10 @@ class Model_Main_Decompose_Preferences
 
 	protected $_ready = false;
 
-	protected static $_instance;
-
-	public function __construct()
+	protected function __construct()
 	{
 		$this->_config = MLib_Config::getModule('main', 'properties');
 		$this->_config = $this->getConfigFromSavedPreferences();
-	}
-
-	/**
-	 * Получение инстанции (иногда полезно)
-	 * @return Model_Main_Decompose_Preferences
-	 */
-	static public function getInstance()
-	{
-		if (self::$_instance === null)
-		{
-			self::$_instance = new self;
-		}
-
-		return self::$_instance;
 	}
 
 	/**

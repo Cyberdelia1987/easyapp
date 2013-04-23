@@ -29,8 +29,8 @@ class Lib_Main_Preferences_Item_Abstract
 	 */
 	public function display()
 	{
-		MLib_Viewer::getInstance()->assign('pref_name', $this->_name);
-		MLib_Viewer::getInstance()->assign('pref_config', $this->_config);
-		return MLib_Viewer::getInstance()->fetch('decompose/view/preferences/item/'.$this->_type.'.tpl');
+		MLib_Viewer::instance()->assign('pref_name', $this->_name);
+		MLib_Viewer::instance()->assign('pref_config', $this->_config);
+		return MLib_Viewer::instance()->fetch('decompose/view/preferences/item/'.$this->_type.'.tpl');
 	}
 }

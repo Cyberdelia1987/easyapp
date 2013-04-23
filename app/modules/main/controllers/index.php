@@ -24,7 +24,7 @@ class Controller_Main_Index extends MLib_Controller_Frontend
 
 		if (!$file_specs || $file_specs && empty($file_specs['name']))
 		{
-			return MLib_Ajax::getInstance()->setException(new MLib_Exception_BadUsage('Не передан файл для загрузки. Выберите корректный файл для загрузки'));
+			return MLib_Ajax::instance()->setException(new MLib_Exception_BadUsage('Не передан файл для загрузки. Выберите корректный файл для загрузки'));
 		}
 
 		$file_path_from = $file_specs['tmp_name'];
@@ -35,7 +35,7 @@ class Controller_Main_Index extends MLib_Controller_Frontend
 		}
 		catch (MLib_Exception_Abstract $ex)
 		{
-			return MLib_Ajax::getInstance()->setException($ex);
+			return MLib_Ajax::instance()->setException($ex);
 		}
 
 		$model_storage = new Model_Main_Input_Files_Storage();
@@ -43,7 +43,7 @@ class Controller_Main_Index extends MLib_Controller_Frontend
 
 		$list_model = new Model_Main_Input_Files_View_List();
 
-		return MLib_Ajax::getInstance()->setSuccess(array(
+		return MLib_Ajax::instance()->setSuccess(array(
 			'message'	=> 'Файл успешно загружен',
 			'list'		=> $list_model->get()
 		));
@@ -63,11 +63,11 @@ class Controller_Main_Index extends MLib_Controller_Frontend
 		}
 		catch (MLib_Exception_Abstract $ex)
 		{
-			MLib_Ajax::getInstance()->setException($ex);
+			MLib_Ajax::instance()->setException($ex);
 		}
 
 		$list_model = new Model_Main_Input_Files_View_List();
-		MLib_Ajax::getInstance()->setSuccess(array(
+		MLib_Ajax::instance()->setSuccess(array(
 			'message'	=> 'Файл успешно удален',
 			'list'		=> $list_model->get()
 		));

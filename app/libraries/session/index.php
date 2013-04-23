@@ -2,31 +2,10 @@
 /**
  * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
-class MLib_Session
+class MLib_Session extends MLib_Base_Singleton
 {
-	/**
-	 * @var MLib_Session
-	 */
-	static protected $_instance;
 
 	protected $_is_started = false;
-
-	private function __construct()
-	{
-
-	}
-
-	/**
-	 * Получеие синглтона сессии
-	 * @return MLib_Session
-	 */
-	static public function getInstance()
-	{
-		if (!self::$_instance) {
-			self::$_instance = new self();
-		}
-		return static::$_instance;
-	}
 
 	/**
 	 * Инициализация сессии

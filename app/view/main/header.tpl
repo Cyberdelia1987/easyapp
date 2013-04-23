@@ -22,6 +22,9 @@
 	<script type="text/javascript" src="{public}js/noty/themes/default.js"></script>
 	<script type="text/javascript" src="{public}js/noty/defaults.js"></script>
 	<script type="text/javascript" src="{public}js/jquery/widgets/ajaxRequest.js"></script>
+	<!-- Подключения плагина Bootstrap Switch -->
+	<script type="text/javascript" src="{public}js/switch/static/js/bootstrapSwitch.js"></script>
+	<link href="{public}js/switch/static/stylesheets/bootstrapSwitch.css" media="screen" rel="stylesheet" type="text/css" />
 
 
 	<meta charset="utf-8" />

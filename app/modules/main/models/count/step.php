@@ -35,8 +35,8 @@ class Model_Main_Count_Step
 
 	public function __construct()
 	{
-		$this->_session = MLib_Session::getInstance();
-		$this->_view = MLib_Viewer::getInstance();
+		$this->_session = MLib_Session::instance();
+		$this->_view = MLib_Viewer::instance();
 		$this->_step = sizeof($this->_session->get('decompose'));
 	}
 
@@ -113,9 +113,9 @@ class Model_Main_Count_Step
 			if ($key == 0) continue;
 
 			$filter = false;
-			if (Model_Main_Decompose_Preferences::getInstance()->getValue('enable_savitsky_golay_filter'))
+			if (Model_Main_Decompose_Preferences::instance()->getValue('enable_savitsky_golay_filter'))
 			{
-				$filter = new Lib_Main_Filter_SavGolay(array('points' => Model_Main_Decompose_Preferences::getInstance()->getValue('filter_points_count')));
+				$filter = new Lib_Main_Filter_SavGolay(array('points' => Model_Main_Decompose_Preferences::instance()->getValue('filter_points_count')));
 			}
 
 			$new_serie = new Lib_Main_Serie();
@@ -126,8 +126,8 @@ class Model_Main_Count_Step
 				->setDenominator($first_serie)
 				->divide()
 				->analyzeLineParts(
-					Model_Main_Decompose_Preferences::getInstance()->getValue('spread_percent'),
-					Model_Main_Decompose_Preferences::getInstance()->getValue('dots_per_jump'))
+					Model_Main_Decompose_Preferences::instance()->getValue('spread_percent'),
+					Model_Main_Decompose_Preferences::instance()->getValue('dots_per_jump'))
 				->filter($filter);
 
 			$mediate_list[] = clone $new_serie;
@@ -166,8 +166,7 @@ class Model_Main_Count_Step
 	 */
 	protected function _saveToSession()
 	{
-		$session = MLib_Session::getInstance();
-		$session->set('decompose.'.$this->getStep(), $this->_series_list);
+		MLib_Session::instance()->set('decompose.'.$this->getStep(), $this->_series_list);
 	}
 
 	/**

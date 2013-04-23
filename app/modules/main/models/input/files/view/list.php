@@ -5,11 +5,15 @@
  */
 class Model_Main_Input_Files_View_List
 {
+	/**
+	 * Объект вида
+	 * @var MLib_Viewer
+	 */
 	protected $_view;
 
 	public function __construct()
 	{
-		$this->_view = MLib_Viewer::getInstance();
+		$this->_view = MLib_Viewer::instance();
 	}
 
 	/**

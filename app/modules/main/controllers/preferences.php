@@ -9,17 +9,17 @@ class Controller_Main_Preferences extends MLib_Controller_Frontend
 	 */
 	public function get()
 	{
-		$model = new Model_Main_Decompose_Preferences();
+		$model = Model_Main_Decompose_Preferences::instance();
 		try
 		{
 			$str = $model->getList()->display();
 		}
 		catch (MLib_Exception_Abstract $ex)
 		{
-			return MLib_Ajax::getInstance()->setException($ex);
+			return MLib_Ajax::instance()->setException($ex);
 		}
 
-		return MLib_Ajax::getInstance()->setSuccess($str);
+		return MLib_Ajax::instance()->setSuccess($str);
 	}
 
 	/**
@@ -31,10 +31,10 @@ class Controller_Main_Preferences extends MLib_Controller_Frontend
 		$preferences = setif($_POST, 'preferences');
 		if (!$preferences)
 		{
-			return MLib_Ajax::getInstance()->setError('Не удалось получить настройки');
+			return MLib_Ajax::instance()->setError('Не удалось получить настройки');
 		}
 
-		$model = new Model_Main_Decompose_Preferences();
+		$model = Model_Main_Decompose_Preferences::instance();
 
 		try
 		{
@@ -42,9 +42,9 @@ class Controller_Main_Preferences extends MLib_Controller_Frontend
 		}
 		catch (MLib_Exception_Abstract $ex)
 		{
-			return MLib_Ajax::getInstance()->setException($ex);
+			return MLib_Ajax::instance()->setException($ex);
 		}
 
-		return MLib_Ajax::getInstance()->setSuccess('Настройки успешно сохранены');
+		return MLib_Ajax::instance()->setSuccess('Настройки успешно сохранены');
 	}
 }

@@ -31,8 +31,8 @@ class Model_Main_Count_Revert
 	 */
 	public function __construct()
 	{
-		$this->_session = MLib_Session::getInstance();
-		$this->_view = MLib_Viewer::getInstance();
+		$this->_session = MLib_Session::instance();
+		$this->_view = MLib_Viewer::instance();
 	}
 
 	public function display()

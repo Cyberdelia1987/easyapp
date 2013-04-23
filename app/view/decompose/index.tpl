@@ -1,10 +1,29 @@
 {include file='main/header.tpl'}
 <div class="side-margins">
 	<div class="content">
-		<div class="controls">
-			<button id="calculate-button" class="btn btn-primary">Рассчитать</button>
-			<button id="preferences-button" class="btn btn-inverse">Настройки</button>
-			<button class="btn btn-primary" style="float: right;" onclick="window.location.reload();">Очистить данные вычислений</button>
+		<div class="navbar controls">
+			<div class="navbar-inner">
+				<a class="brand" href="#">Управление</a>
+				<ul class="nav">
+					<li class="divider-vertical"></li>
+					<li><span class="btn-group">
+						<button id="calculate-button" class="btn btn-primary">Рассчитать</button>
+					</span></li>
+					<li class="divider-vertical"></li>
+					<li><span class="btn-group">
+						<button id="preferences-button" class="btn btn-inverse">Настройки</button>
+					</span></li>
+					<li class="divider-vertical"></li>
+					<li><span style="display: inline-block; margin-top: 5px;">
+						<label style="float: left; margin: 5px 20px 0 0;" for="toggle-manual">Ручной режим: </label>
+						<span style="float: left;" class="switch"><input id="toggle-manual" type="checkbox"></span>
+					</span></li>
+					<li class="divider-vertical"></li>
+					<li class="pull-right"><span class="btn-group">
+						<button class="btn btn-primary" style="float: right;" onclick="window.location.reload();">Очистить данные вычислений</button>
+					</span></li>
+				</ul>
+			</div>
 		</div>
 		<div class="tabs-container">
 			<div id="tabs">

@@ -3,10 +3,8 @@
  * Краткое описание назначения класса
  * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
-class MLib_Ajax
+class MLib_Ajax extends MLib_Base_Singleton
 {
-	static protected $_instance;
-
 	/**
 	 * Если включен режим обработки AJAX-ответов
 	 * @var
@@ -30,25 +28,6 @@ class MLib_Ajax
 	const RESULT_ERROR 			= 'error';
 	const RESULT_GLOBAL_ERROR 	= 'global_error';
 	const RESULT_EXCEPTION		= 'exception';
-
-	/**
-	 * Конструктор
-	 */
-	protected function __construct()
-	{}
-
-	/**
-	 * Получеие синглтона AJAX'а
-	 * @return MLib_Ajax
-	 */
-	static public function getInstance()
-	{
-		if (!self::$_instance) {
-			self::$_instance = new self();
-		}
-
-		return static::$_instance;
-	}
 
 	/**
 	 * Установка положительного ответа AJAX'а

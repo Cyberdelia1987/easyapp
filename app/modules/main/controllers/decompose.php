@@ -41,13 +41,13 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 		}
 		catch (MLib_Exception_Abstract $ex)
 		{
-			return MLib_Ajax::getInstance()->setException($ex);
+			return MLib_Ajax::instance()->setException($ex);
 		}
 
 		$this->view->assign('list', $model->getSeriesList());
 		//$this->view->assign('mediate_list', $model->getMediateList());
 
-		return MLib_Ajax::getInstance()->setSuccess(array(
+		return MLib_Ajax::instance()->setSuccess(array(
 			'message'		=> 'Данные шага вычисления #'.$model->getStep().' успешно получены',
 			'html'			=> $html,
 			'step'			=> $model->getStep(),
@@ -70,12 +70,12 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 		}
 		catch (MLib_Exception_Abstract $ex)
 		{
-			return MLib_Ajax::getInstance()->setException($ex);
+			return MLib_Ajax::instance()->setException($ex);
 		}
 
 		$this->view->assign('list', $model->getSeriesList());
 
-		return MLib_Ajax::getInstance()->setSuccess(array(
+		return MLib_Ajax::instance()->setSuccess(array(
 			'message'		=> 'Данные шага вычисления #'.$model->getStep().' успешно получены',
 			'html'			=> $html,
 			'step'			=> $model->getStep(),
