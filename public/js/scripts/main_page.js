@@ -14,15 +14,14 @@ $(document).ready(function() {
 				addClass: 'btn btn-primary',
 				text: 'Да',
 				onClick: function() {
-					var list = $('.file-list');
-					list.ajaxRequest({
+					$(this).ajaxRequest({
 						url: '/removeFile/'+elem.attr('rel'),
 						onSuccess : function(data) {
 							noty({text : data.response.message, type : 'success'});
 							$('.file-list').html(data.response.list);
 						}
 					});
-					list.ajaxRequest('query');
+					$(this).ajaxRequest('query');
 					confirm.close();
 				}
 			}, {
@@ -38,12 +37,14 @@ $(document).ready(function() {
 	 */
 	$('#upload-form button[type="submit"]').click(function(event){
 		event.preventDefault();
+		event.stopPropagation();
 		var uploadForm = $('#upload-form');
-		var formData = new FormData(uploadForm[0]);
+		var data = new FormData(uploadForm[0]);
 
-		uploadForm.ajaxRequest({
+		$(this).ajaxRequest({
 			url: '/uploadFile/',
-			data: formData,
+			type: 'POST',
+			data: data,
 			onSuccess		: function(data) {
 				noty({text : data.response.message, type : 'success'});
 				$('.file-list').html(data.response.list);
@@ -52,6 +53,6 @@ $(document).ready(function() {
 			onGlobalError	: function(data) { noty({text : data.response.message, type : 'error'}); },
 			onException		: function(data) { noty({text : data.response.message, type : 'error'}); }
 		});
-		uploadForm.ajaxRequest('query');
+		$(this).ajaxRequest('query').ajaxRequest('destroy');
 	});
 });

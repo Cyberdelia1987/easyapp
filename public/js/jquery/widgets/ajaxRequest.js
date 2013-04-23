@@ -75,42 +75,4 @@ $(function() {
 			});
 		}
 	});
-/*
-	// initialize with default options
-	$( "#my-widget1" ).colorize();
-
-	// initialize with two customized options
-	$( "#my-widget2" ).colorize({
-		red: 60,
-		blue: 60
-	});
-
-	// initialize with custom green value
-	// and a random callback to allow only colors with enough green
-	$( "#my-widget3" ).colorize( {
-		green: 128,
-		random: function( event, ui ) {
-			return ui.green > 128;
-		}
-	});
-
-	// click to toggle enabled/disabled
-	$( "#disable" ).click(function() {
-		// use the custom selector created for each widget to find all instances
-		// all instances are toggled together, so we can check the state from the first
-		if ( $( ":custom-colorize" ).colorize( "option", "disabled" ) ) {
-			$( ":custom-colorize" ).colorize( "enable" );
-		} else {
-			$( ":custom-colorize" ).colorize( "disable" );
-		}
-	});
-
-	// click to set options after initalization
-	$( "#black" ).click( function() {
-		$( ":custom-colorize" ).colorize( "option", {
-			red: 0,
-			green: 0,
-			blue: 0
-		});
-	});*/
 });
