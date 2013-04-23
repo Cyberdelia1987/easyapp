@@ -23,6 +23,12 @@ class Model_Main_Count_Input
 	protected $_view;
 
 	/**
+	 * Объект работы с сессией
+	 * @var MLib_Session
+	 */
+	protected $_session;
+
+	/**
 	 * Конструктор
 	 * @param string $file_name
 	 */
@@ -30,6 +36,7 @@ class Model_Main_Count_Input
 	{
 		$this->_file_name = $file_name;
 		$this->_view = MLib_Viewer::instance();
+		$this->_session = MLib_Session::instance();
 	}
 
 	/**
@@ -51,10 +58,8 @@ class Model_Main_Count_Input
 	 */
 	protected function _saveToSession()
 	{
-		$session = MLib_Session::instance();
-		$session->remove('decompose');
-
-		$session->set('decompose.0', $this->_series_list);
+		$this->_session->remove('decompose');
+		$this->_session->set('decompose.0', $this->_series_list);
 	}
 
 	/**
@@ -64,6 +69,13 @@ class Model_Main_Count_Input
 	protected function _getObjectsArray()
 	{
 		$model_storage = new Model_Main_Input_Files_Storage();
+
+		if ($this->_session->get('last_file_name') == $this->_file_name)
+		{
+			return $this->_session->get('decompose.0');
+		}
+
+		$this->_session->set('last_file_name', $this->_file_name);
 
 		return unserialize($model_storage->getFileObject($this->_file_name)->read());
 	}

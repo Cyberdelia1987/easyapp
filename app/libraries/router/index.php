@@ -49,6 +49,9 @@ class MLib_Router extends MLib_Base_Singleton
 	 */
 	public function route()
 	{
+		/**
+		 * @var MLib_Controller_Frontend $controller
+		 */
 		$segments = $this->_segments;
 
 		/**
@@ -107,8 +110,10 @@ class MLib_Router extends MLib_Base_Singleton
 			throw new MLib_Exception_WrongArgument('Метод "'.$this->_route['action'].'" не найден в контроллере "'.$controller_name.'"');
 		}
 
+		$controller->preCallMethod();
 		// Вызов метода найденного контроллера
 		call_user_func_array(array($controller, $this->_route['action']), $this->_right_segments);
+		$controller->postCallMethod();
 	}
 
 	/**

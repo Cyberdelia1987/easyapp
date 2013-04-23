@@ -6,12 +6,15 @@
 $topnav = array(
 	array(
 		'title'		=> 'Загрузка файлов',
-		'url'		=> '/main/index/index',
+		'url'		=> '/',
+		'regexp'	=> '/main/index/index',
 		'strict'	=> true
 	),
 	array(
-		'title'		=> 'Рассчеты',
-		'url'		=> '/main/decompose/index/{filename}',
+		'title'		=> 'Последние рассчеты',
+		'plugin'	=> 'MLib_Router_Nav_Plugin_LastFile',
+		'url'		=> '/decompose',
+		'regexp'	=> '/main/decompose/index/[^/]*',
 		'strict'	=> true
 	)
 );

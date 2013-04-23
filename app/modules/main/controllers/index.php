@@ -10,7 +10,7 @@ class Controller_Main_Index extends MLib_Controller_Frontend
 	public function index()
 	{
 		$this->view->assign('list_model', new Model_Main_Input_Files_View_List());
-		$this->view->display('main/index.tpl');
+		$this->view->view('main/index.tpl');
 	}
 
 	/**

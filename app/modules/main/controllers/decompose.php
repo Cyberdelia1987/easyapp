@@ -26,7 +26,7 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 
 		$this->view->assign('model_count_main', $model);
 		$this->view->assign('display_data', $display_data);
-		$this->view->display('decompose/index.tpl');
+		$this->view->view('decompose/index.tpl');
 	}
 
 	/**

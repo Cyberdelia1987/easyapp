@@ -18,6 +18,8 @@ class MLib_Application extends MLib_Base_Singleton
 			MLib_Router::instance()->route();
 			// Обработка вывода AJAX-данных, если инициализировались
 			MLib_Ajax::instance()->display();
+			// Отображение всех шаблонов
+			MLib_Viewer::instance()->viewAll();
 		}
 		catch(Exception $ex)
 		{
