@@ -17,12 +17,13 @@ $(document).ready(function() {
 					text : 'Настройки успешно получены с сервера',
 					type : 'success'
 				});
-				$('#preferences-dialog').html(data.response);
-				$( "#preferences-dialog" ).dialog({
+				preferencesDialog.html(data.response);
+				preferencesDialog.dialog({
 					modal: true,
 					width: 600,
 					height: 450
 				});
+				preferencesDialog.find('[type=checkbox]').wrap('<div class="switch" data-on-label="Да" data-off-label="Нет"/>').parent().bootstrapSwitch();
 			}
 		});
 		$(this).ajaxRequest('query');

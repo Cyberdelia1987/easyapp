@@ -14,9 +14,9 @@
 						<button id="preferences-button" class="btn btn-inverse">Настройки</button>
 					</span></li>
 					<li class="divider-vertical"></li>
-					<li><span style="display: inline-block; margin-top: 5px;">
-						<label style="float: left; margin: 5px 20px 0 0;" for="toggle-manual">Ручной режим: </label>
-						<span style="float: left;" class="switch"><input id="toggle-manual" type="checkbox"></span>
+					<li><span style="display: inline-block; margin-top: 5px;" >
+						<label style="float: left; margin: 5px 20px 0 0;">Ручной режим: </label>
+						<span style="float: left;" class="switch" id="toggle-manual" data-on-label="Да" data-off-label="Нет"><input type="checkbox"></span>
 					</span></li>
 					<li class="divider-vertical"></li>
 					<li class="pull-right"><span class="btn-group">
@@ -47,6 +47,7 @@
 <div id="preferences-dialog" title="Настройки декомпозиции"></div>
 
 <script type="text/javascript" src="{public}js/scripts/decompose_page.js"></script>
+<script type="text/javascript" src="{public}js/scripts/modeswitch.js"></script>
 <script type="text/javascript">
 {literal}
 	$(document).ready(function(){
