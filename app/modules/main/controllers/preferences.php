@@ -47,4 +47,16 @@ class Controller_Main_Preferences extends MLib_Controller_Frontend
 
 		return MLib_Ajax::instance()->setSuccess('Настройки успешно сохранены');
 	}
+
+	/**
+	 * Переключение состояния режима (ручной/автоматический)
+	 * @return bool
+	 */
+	public function switchMode()
+	{
+		$manual = setif($_POST, 'manual_mode_switcher');
+
+		MLib_Session::instance()->set('preferences.manual_mode', $manual);
+		return MLib_Ajax::instance()->setSuccess($manual > 0 ? 'Состояние переключено на ручной режим' : 'Состояние переключено на автоматический режим');
+	}
 }

@@ -14,10 +14,17 @@
 						<button id="preferences-button" class="btn btn-inverse">Настройки</button>
 					</span></li>
 					<li class="divider-vertical"></li>
-					<li><span style="display: inline-block; margin-top: 5px;" >
-						<label style="float: left; margin: 5px 20px 0 0;">Ручной режим: </label>
-						<span style="float: left;" class="switch" id="toggle-manual" data-on-label="Да" data-off-label="Нет"><input type="checkbox"></span>
-					</span></li>
+					<li>
+						<form id="switch_mode_form" method="post" enctype="application/x-www-form-urlencoded">
+							<span style="display: inline-block; margin-top: 5px;" >
+								<label for="manual_mode_switcher" style="float: left; margin: 5px 20px 0 0;">Ручной режим: </label>
+								<span style="float: left;" class="switch" id="toggle-manual" data-on-label="Да" data-off-label="Нет">
+									<input name="manual_mode_switcher" type="hidden" value="0">
+									<input id="manual_mode_switcher" name="manual_mode_switcher" type="checkbox" value="1" {if $manual_mode}checked="checked" {/if}>
+								</span>
+							</span>
+						</form>
+					</li>
 					<li class="divider-vertical"></li>
 					<li class="pull-right"><span class="btn-group">
 						<button class="btn btn-primary" style="float: right;" onclick="window.location.reload();">Очистить данные вычислений</button>

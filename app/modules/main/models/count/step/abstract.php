@@ -2,7 +2,7 @@
 /**
  * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
-class Model_Main_Count_Step
+class Model_Main_Count_Step_Abstract
 {
 	protected $_step;
 
@@ -33,11 +33,19 @@ class Model_Main_Count_Step
 	 */
 	protected $_view;
 
+	/**
+	 * Объект фильтра
+	 * @var bool|Lib_Main_Filter_SavGolay
+	 */
+	protected $_filter;
+
 	public function __construct()
 	{
 		$this->_session = MLib_Session::instance();
 		$this->_view = MLib_Viewer::instance();
 		$this->_step = sizeof($this->_session->get('decompose'));
+		$this->_filter = (Model_Main_Decompose_Preferences::instance()->getValue('enable_savitsky_golay_filter')) ?
+			$filter = new Lib_Main_Filter_SavGolay(array('points' => Model_Main_Decompose_Preferences::instance()->getValue('filter_points_count'))) : false;
 	}
 
 	/**
@@ -112,12 +120,6 @@ class Model_Main_Count_Step
 		{
 			if ($key == 0) continue;
 
-			$filter = false;
-			if (Model_Main_Decompose_Preferences::instance()->getValue('enable_savitsky_golay_filter'))
-			{
-				$filter = new Lib_Main_Filter_SavGolay(array('points' => Model_Main_Decompose_Preferences::instance()->getValue('filter_points_count')));
-			}
-
 			$new_serie = new Lib_Main_Serie();
 			$new_serie
 				->setList($series_list)
@@ -128,13 +130,13 @@ class Model_Main_Count_Step
 				->analyzeLineParts(
 					Model_Main_Decompose_Preferences::instance()->getValue('spread_percent'),
 					Model_Main_Decompose_Preferences::instance()->getValue('dots_per_jump'))
-				->filter($filter);
+				->filter($this->_filter);
 
 			$mediate_list[] = clone $new_serie;
 
 			$new_serie
 				->excludeDenominator()
-				->filter($filter);
+				->filter($this->_filter);
 			$series_list[] = $new_serie;
 		}
 

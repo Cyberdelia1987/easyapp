@@ -29,6 +29,12 @@ class Model_Main_Count_Input
 	protected $_session;
 
 	/**
+	 * Ручной или автоматический режим
+	 * @var bool
+	 */
+	protected $_manual_mode;
+
+	/**
 	 * Конструктор
 	 * @param string $file_name
 	 */
@@ -37,6 +43,7 @@ class Model_Main_Count_Input
 		$this->_file_name = $file_name;
 		$this->_view = MLib_Viewer::instance();
 		$this->_session = MLib_Session::instance();
+		$this->_manual_mode = (bool) MLib_Session::instance()->get('preferences.manual_mode');
 	}
 
 	/**

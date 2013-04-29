@@ -7,12 +7,14 @@ $(function() {
 			url						: '',
 			type					: 'GET',
 			data					: null,
+			contentType				: false,
+			processData				: false,
 			beforeQuery				: function() { $('.ajax-loader').show(); },
 			beforeProcessRequest	: function(data) { $('.ajax-loader').hide(); },
 			onUndefined				: function(data) {
 				noty({text : 'Ошибка получения данных от сервера: неверный ответ: <br>'+data,	type: 'error'});
 			},
-			onSuccess				: function(data) {},
+			onSuccess				: function(data) { noty({text : data.response, type : 'success'});},
 			onError					: function(data) { noty({text : data.response, type : 'error'}); },
 			onGlobalError			: function(data) { noty({text : data.response, type : 'error'}); },
 			onException				: function(data) { noty({text : data.response, type : 'error'}); }
@@ -57,8 +59,8 @@ $(function() {
 				type		: this.options.type,
 				data		: this.options.data,
 				cache		: false,
-				contentType	: false,
-				processData	: false
+				contentType	: this.options.contentType,
+				processData	: this.options.processData
 			}).done(function(data){
 				widget.options.beforeProcessRequest(data);
 				if (typeof(data.result) == 'undefined') {

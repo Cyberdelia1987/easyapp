@@ -298,6 +298,18 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function hasLinearParts()
+	{
+		if (!is_null($this->_linear_parts))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Получение значения самого длинного участка
 	 * @return bool
 	 * @throws MLib_Exception_BadUsage

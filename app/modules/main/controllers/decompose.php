@@ -26,6 +26,7 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 
 		$this->view->assign('model_count_main', $model);
 		$this->view->assign('display_data', $display_data);
+		$this->view->assign('manual_mode', MLib_Session::instance()->get('preferences.manual_mode'));
 		$this->view->view('decompose/index.tpl');
 	}
 
@@ -34,7 +35,7 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 	 */
 	public function getNext()
 	{
-		$model = new Model_Main_Count_Step();
+		$model = Model_Main_Count_Mode::getStepModel();
 		try
 		{
 			$html = $model->display();
@@ -62,7 +63,7 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 	 */
 	public function getRevert()
 	{
-		$model = new Model_Main_Count_Revert();
+		$model = Model_Main_Count_Mode::getRevertModel();
 
 		try
 		{

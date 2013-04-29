@@ -2,7 +2,7 @@
 /**
  * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
-class Model_Main_Count_Revert
+class Model_Main_Count_Revert_Abstract
 {
 	/**
 	 * @var Lib_Main_Serie_List
@@ -64,9 +64,9 @@ class Model_Main_Count_Revert
 			 */
 			$bear_serie = $this->_session->get('decompose.'.$i);
 			$bear_serie = $bear_serie[0];
-			$coef = $i != 0 ? $bear_serie->getLongestLinePartValue() : 1;
+			$coef = $bear_serie->hasLinearParts() ? $bear_serie->getLongestLinePartValue() : 1;
 
-			if ($i != 0)
+			if ($bear_serie->hasLinearParts())
 			{
 				$coef = $coef - $bear_serie->getNextLinePartValue();
 			}

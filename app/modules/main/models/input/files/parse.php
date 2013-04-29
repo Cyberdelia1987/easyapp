@@ -108,6 +108,7 @@ class Model_Main_Input_Files_Parse
 		{
 			foreach ($line as $key => $cell_value)
 			{
+				$cell_value = trim($cell_value);
 				if (!is_numeric($cell_value))
 				{
 					throw new MLib_Exception_WrongArgument('Значения столбцов, переданных в файле не являются числом. Обработка файла прекращена');
