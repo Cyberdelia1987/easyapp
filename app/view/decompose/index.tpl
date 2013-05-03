@@ -15,11 +15,11 @@
 					</span></li>
 					<li class="divider-vertical"></li>
 					<li>
-						<form id="switch_mode_form" method="post" enctype="application/x-www-form-urlencoded">
+						<form id="switch_mode_form" method="post" enctype="application/x-www-form-urlencoded" style="margin:0;">
 							<span style="display: inline-block; margin-top: 5px;" >
 								<label for="manual_mode_switcher" style="float: left; margin: 5px 20px 0 0;">Ручной режим: </label>
+								<input name="manual_mode_switcher" type="hidden" value="0">
 								<span style="float: left;" class="switch" id="toggle-manual" data-on-label="Да" data-off-label="Нет">
-									<input name="manual_mode_switcher" type="hidden" value="0">
 									<input id="manual_mode_switcher" name="manual_mode_switcher" type="checkbox" value="1" {if $manual_mode}checked="checked" {/if}>
 								</span>
 							</span>
@@ -52,6 +52,7 @@
 </div>
 
 <div id="preferences-dialog" title="Настройки декомпозиции"></div>
+<div id="linear-dialog" title="Линейные участки"></div>
 
 <script type="text/javascript" src="{public}js/scripts/decompose_page.js"></script>
 <script type="text/javascript" src="{public}js/scripts/modeswitch.js"></script>

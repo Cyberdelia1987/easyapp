@@ -83,4 +83,37 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 			'can_continue'	=> false
 		));
 	}
+
+	/**
+	 * @return bool
+	 */
+	public function getDividedManual()
+	{
+		$model = new Model_Main_Count_Step_Manual();
+		try
+		{
+			$html = $model->display();
+		}
+		catch (MLib_Exception_Abstract $ex)
+		{
+			return MLib_Ajax::instance()->setException($ex);
+		}
+
+		$this->view->assign('list', $model->getSeriesList());
+		//$this->view->assign('mediate_list', $model->getMediateList());
+
+		return MLib_Ajax::instance()->setSuccess(array(
+			'message'		=> 'Данные шага вычисления #'.$model->getStep().' успешно получены',
+			'html'			=> $html,
+			'step'			=> $model->getStep(),
+			'can_continue'	=> ($model->getSeriesCount() > 1) ? true : false,
+			//'log'			=> $this->view->fetch('decompose/view/log.tpl')
+			'linears'		=> $this->view->fetch('decompose/view/result/manual_linear.tpl')
+		));
+	}
+
+	public function getExcludedManual()
+	{
+
+	}
 }

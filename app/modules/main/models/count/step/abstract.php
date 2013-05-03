@@ -18,12 +18,12 @@ class Model_Main_Count_Step_Abstract
 
 	/**
 	 * Список столбцов данных
-	 * @var Lib_Main_Serie_List
+	 * @var Lib_Main_Serie_List|Lib_Main_Serie[]
 	 */
 	protected $_series_list;
 
 	/**
-	 * @var Lib_Main_Serie_List
+	 * @var Lib_Main_Serie_List|Lib_Main_Serie[]
 	 */
 	protected $_mediate_list;
 
@@ -45,7 +45,7 @@ class Model_Main_Count_Step_Abstract
 		$this->_view = MLib_Viewer::instance();
 		$this->_step = sizeof($this->_session->get('decompose'));
 		$this->_filter = (Model_Main_Decompose_Preferences::instance()->getValue('enable_savitsky_golay_filter')) ?
-			$filter = new Lib_Main_Filter_SavGolay(array('points' => Model_Main_Decompose_Preferences::instance()->getValue('filter_points_count'))) : false;
+		$filter = new Lib_Main_Filter_SavGolay(array('points' => Model_Main_Decompose_Preferences::instance()->getValue('filter_points_count'))) : false;
 	}
 
 	/**
@@ -133,16 +133,19 @@ class Model_Main_Count_Step_Abstract
 				->filter($this->_filter);
 
 			$mediate_list[] = clone $new_serie;
-
-			$new_serie
-				->excludeDenominator()
-				->filter($this->_filter);
 			$series_list[] = $new_serie;
 		}
 
 		$this->_mediate_list = $mediate_list;
 		$this->_series_list = $series_list;
+
+		$this->_excludeDenominator();
 	}
+
+	/**
+	 * Исключение полосы
+	 */
+	protected function _excludeDenominator() {}
 
 	/**
 	 * Получение предыдущего вычисления из сессии
@@ -169,6 +172,7 @@ class Model_Main_Count_Step_Abstract
 	protected function _saveToSession()
 	{
 		MLib_Session::instance()->set('decompose.'.$this->getStep(), $this->_series_list);
+		$this->_session->set('mediate.'.($this->getStep() - 1), $this->_mediate_list);
 	}
 
 	/**

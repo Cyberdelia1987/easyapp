@@ -72,6 +72,81 @@ $(document).ready(function() {
 function getNextStep()
 {
 	if (!can_continue) return;
+	$('#manual_mode_switcher').parent().bootstrapSwitch('status') ? getNextManual() : getNextAutomatic();
+}
+
+/**
+ * Подтверждение следующего шага разложения
+ */
+function confirmNextStep()
+{
+	var confirm = noty({
+		text: 'Продолжить разложение?',
+		layout: 'center',
+		type: 'information',
+		modal: true,
+		buttons:  [{
+			addClass: 'btn btn-primary',
+			text: 'Да',
+			onClick: function() {
+				getNextStep();
+				confirm.close();
+			}
+		}, {
+			addClass: 'btn btn-danger',
+			text: 'Нет',
+			onClick: function() {
+				getFinalData();
+				confirm.close();
+			}
+		}]
+	});
+}
+
+/**
+ * Получение данных по ручному рассчету
+ */
+function getNextManual()
+{
+	var button = $('#calculate-button')
+	button.ajaxRequest({
+		url: '/decompose/getDividedManual/',
+		onSuccess: function(data) {
+			can_continue = false;
+
+			var tabs_container = $('#tabs');
+			noty({
+				text : data.response.message,
+				type : 'success'
+			});
+
+			var html = $('<div id="tabs-'+data.response.step+'"></div>');
+			html.html(data.response.html);
+			console.log(html.text());
+			tabs_container.append(html);
+			var list_elem = $('<li><a href="#tabs-'+data.response.step+'">Шаг #'+data.response.step+'</a></li>');
+			$('.tabs-list').append(list_elem);
+
+			tabs_container.tabs("destroy").tabs({active: $('.tabs-list li').length - 1});
+
+			var linears_dialog = $('#linear-dialog');
+			linears_dialog.html(data.response.linears);
+			linears_dialog.dialog({
+				//modal: true,
+				width: 600,
+				height: 585
+			});
+			linears_dialog.find('#linear-tabs').tabs();
+		}
+	});
+	button.ajaxRequest('query').ajaxRequest('destroy');
+}
+
+/**
+ *
+ */
+function getNextAutomatic()
+{
 	var button = $('#calculate-button');
 	button.ajaxRequest({
 		url: '/decompose/getNext/',
@@ -101,35 +176,7 @@ function getNextStep()
 			}
 		}
 	});
-	button.ajaxRequest('query');
-}
-
-/**
- * Подтверждение следующего шага разложения
- */
-function confirmNextStep()
-{
-	var confirm = noty({
-		text: 'Продолжить разложение?',
-		layout: 'center',
-		type: 'information',
-		modal: true,
-		buttons:  [{
-			addClass: 'btn btn-primary',
-			text: 'Да',
-			onClick: function() {
-				getNextStep();
-				confirm.close();
-			}
-		}, {
-			addClass: 'btn btn-danger',
-			text: 'Нет',
-			onClick: function() {
-				getFinalData();
-				confirm.close();
-			}
-		}]
-	});
+	button.ajaxRequest('query').ajaxRequest('destroy');
 }
 
 /**

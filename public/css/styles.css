@@ -12,7 +12,7 @@ body { font-size: 12px; }
 .main-log { overflow: scroll; height: 200px; }
 .main-chart-wrapper { height: 500px; }
 .chart-block { height: 100%; width: 100%; }
-.preferences-form .form-field { padding: 15px 0; border-bottom: 1px dashed #ccc; overflow: hidden; clear: both; }
+.preferences-form .form-field { padding: 15px 0; }
 .preferences-form .buttons { margin-top: 20px; float: right; }
 .preferences-form .holder { float: left; }
 .preferences-form .label-holder { width: 60%; }
@@ -22,3 +22,6 @@ body { font-size: 12px; }
 .ajax-loader .loader-img { position: absolute; top: 50%; left: 50%; }
 .ajax-loader .loader-img img { margin-left: -50%; margin-top: -50%; }
 .main-log .selected { color: #E2421A; }
+.form-field input[type="radio"] { float: left; margin-right: 10px; }
+.form-field { padding: 5px 0; border-bottom: 1px dashed #ccc; overflow: hidden; clear: both; }
+.ui-dialog.ui-widget.ui-widget-content.ui-corner-all { box-shadow: 0 0 0 5px rgba(0,0,0,0.3); }
