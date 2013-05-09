@@ -170,7 +170,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 		{
 			$tmp = $this->_denominator[$key] == 0 ? 0 : round($value / $this->_denominator[$key], 5);
 
-			if (abs(($tmp - $prev_value) / $prev_value) > 50)
+			if (($prev_value == 0 ? 0 : abs(($tmp - $prev_value) / $prev_value)) > 50)
 			{
 				$tmp = $prev_value;
 			}
