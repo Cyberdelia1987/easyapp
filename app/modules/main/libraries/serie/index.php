@@ -29,7 +29,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	protected $_linear_parts = null;
 
 	/**
-	 * @var Lib_Main_Serie_List
+	 * @var Lib_Main_Serie_List|Lib_Main_Serie[]
 	 */
 	protected $_list;
 
@@ -247,6 +247,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 
 		$line_parts = $this->_sortLinearParts($line_parts);
 		$this->_linear_parts = $line_parts;
+		$this->reselect();
 
 		return $this;
 	}
@@ -298,6 +299,15 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	}
 
 	/**
+	 * Метод установки массива линейных участков графику
+	 * @param array $line_parts
+	 */
+	public function setLineParts(array $line_parts)
+	{
+		$this->_linear_parts = $line_parts;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function hasLinearParts()
@@ -316,6 +326,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	 */
 	public function getLongestLinePartValue()
 	{
+		/** @var Lib_Main_Serie $serie */
 		if ($this->_linear_parts === null)
 		{
 			throw new MLib_Exception_BadUsage('Сначала линейные участки надо рассчитать');
@@ -323,20 +334,39 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 
 		if ($serie = setif($this->_list, 0))
 		{
+			foreach ($this->_linear_parts as $line_part)
+			{
+				if ($line_part['selected']) return $line_part['average'];
+			}
+		}
+
+		return $this->_linear_parts[0]['average'];
+	}
+
+	/**
+	 * Перераспределить автоматически выбранные линейные участки
+	 */
+	public function reselect()
+	{
+		/** @var Lib_Main_Serie $serie */
+		if ($this->_linear_parts === null) return;
+
+		if ($serie = setif($this->_list, 0))
+		{
 			$line_parts = $serie->getLineParts();
+
 			$etalon = $line_parts[0];
 			foreach ($this->_linear_parts as $key =>$line_part)
 			{
 				if (($line_part['start'] >= $etalon['start'] && $line_part['start'] <= $etalon['end']) || ($line_part['end'] >= $etalon['start'] && $line_part['end'] <= $etalon['end']))
 				{
 					$this->_linear_parts[$key]['selected'] = true;
-					return $line_part['average'];
+					return;
 				}
 			}
 		}
 
 		$this->_linear_parts[0]['selected'] = true;
-		return $this->_linear_parts[0]['average'];
 	}
 
 	/**

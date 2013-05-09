@@ -5,6 +5,7 @@ var can_continue = true;
  */
 $(document).ready(function() {
 	var preferencesDialog = $('#preferences-dialog');
+	var linear_dialog = $('#linear-dialog');
 	/**
 	 * Загрузка настроек с сервера
 	 */
@@ -64,6 +65,14 @@ $(document).ready(function() {
 		event.preventDefault();
 		getNextStep();
 	});
+
+	/**
+	 *
+	 */
+	linear_dialog.on('click', '#send-linears', function(event) {
+		event.preventDefault();
+		getExcluded();
+	});
 });
 
 /**
@@ -122,24 +131,22 @@ function getNextManual()
 
 			var html = $('<div id="tabs-'+data.response.step+'"></div>');
 			html.html(data.response.html);
-			console.log(html.text());
 			tabs_container.append(html);
 			var list_elem = $('<li><a href="#tabs-'+data.response.step+'">Шаг #'+data.response.step+'</a></li>');
 			$('.tabs-list').append(list_elem);
 
-			tabs_container.tabs("destroy").tabs({active: $('.tabs-list li').length - 1});
+			tabs_container.tabs("destroy");
+			switchToLastTab();
 
 			var linears_dialog = $('#linear-dialog');
 			linears_dialog.html(data.response.linears);
 			linears_dialog.dialog({
-				//modal: true,
 				width: 600,
 				height: 585
 			});
 			linears_dialog.find('#linear-tabs').tabs();
 		}
-	});
-	button.ajaxRequest('query').ajaxRequest('destroy');
+	}).ajaxRequest('query').ajaxRequest('destroy');
 }
 
 /**
@@ -165,7 +172,8 @@ function getNextAutomatic()
 			var list_elem = $('<li><a href="#tabs-'+data.response.step+'">Шаг #'+data.response.step+'</a></li>');
 			$('.tabs-list').append(list_elem);
 
-			tabs_container.tabs("destroy").tabs({active: $('.tabs-list li').length - 1});
+			tabs_container.tabs("destroy");
+			switchToLastTab();
 
 			$('.main-log').append(data.response.log);
 
@@ -175,8 +183,7 @@ function getNextAutomatic()
 				confirmNextStep();
 			}
 		}
-	});
-	button.ajaxRequest('query').ajaxRequest('destroy');
+	}).ajaxRequest('query').ajaxRequest('destroy');
 }
 
 /**
@@ -200,8 +207,51 @@ function getFinalData() {
 			tabs_container.append(html);
 			var list_elem = $('<li><a href="#tabs-'+data.response.step+'">Конечные рассчеты</a></li>');
 			$('.tabs-list').append(list_elem);
-			tabs_container.tabs("destroy").tabs({active: $('.tabs-list li').length - 1});
+			tabs_container.tabs("destroy");
+			switchToLastTab();
 		}
-	});
-	tabs.ajaxRequest('query');
+	}).ajaxRequest('query');
+}
+
+/**
+ *
+ */
+function getExcluded()
+{
+	var formData = new FormData($('#linears-form')[0]);
+	var dialog = $('#linear-dialog');
+	dialog.dialog('close');
+
+	dialog.ajaxRequest({
+		url: '/decompose/getExcludedManual',
+		data: formData,
+		onSuccess : function(data) {
+			can_continue = data.response.can_continue;
+
+			noty({
+				text : data.response.message,
+				type : 'success'
+			});
+
+			var html = $(data.response.html);
+			$('body').append(html);
+			console.log($('.tabs-list li').length);
+			switchToLastTab();
+			$('.main-log').append(data.response.log);
+
+			if (!data.response.can_continue) {
+				getFinalData();
+			} else {
+				confirmNextStep();
+			}
+		}
+	}).ajaxRequest('query').ajaxRequest('destroy');
+}
+
+/**
+ *
+ */
+function switchToLastTab()
+{
+	$('#tabs').tabs({active: $('#tabs .tabs-list li').length - 1});
 }

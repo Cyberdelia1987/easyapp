@@ -100,20 +100,41 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 		}
 
 		$this->view->assign('list', $model->getSeriesList());
-		//$this->view->assign('mediate_list', $model->getMediateList());
 
 		return MLib_Ajax::instance()->setSuccess(array(
 			'message'		=> 'Данные шага вычисления #'.$model->getStep().' успешно получены',
 			'html'			=> $html,
 			'step'			=> $model->getStep(),
 			'can_continue'	=> ($model->getSeriesCount() > 1) ? true : false,
-			//'log'			=> $this->view->fetch('decompose/view/log.tpl')
 			'linears'		=> $this->view->fetch('decompose/view/result/manual_linear.tpl')
 		));
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function getExcludedManual()
 	{
+		$form_data = $_POST;
+		$model = new Model_Main_Count_Exclude($form_data);
 
+		try
+		{
+			$html = $model->display();
+		}
+		catch(MLib_Exception_Abstract $ex)
+		{
+			return MLib_Ajax::instance()->setException($ex);
+		}
+
+		$this->view->assign('list', $model->getSeriesList());
+
+		return MLib_Ajax::instance()->setSuccess(array(
+			'message'		=> 'Данные исключения для шага #'.$model->getStep().' успешно получены',
+			'html'			=> $html,
+			'step'			=> $model->getStep(),
+			'can_continue'	=> ($model->getSeriesCount() > 1) ? true : false,
+			'log'			=> $this->view->fetch('decompose/view/log.tpl')
+		));
 	}
 }
