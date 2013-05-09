@@ -97,7 +97,7 @@ class Model_Main_Count_Step_Manual //extends Model_Main_Count_Step_Abstract
 		$series_list = new Lib_Main_Serie_List();
 		$series_list->setXAxis($this->_prev_calc->getXAxis());
 
-		$first_serie = reset($this->_prev_calc->toArray());
+		$first_serie = first($this->_prev_calc->toArray());
 
 		$mediate_list = new Lib_Main_Serie_List();
 		$mediate_list->setXAxis($this->_prev_calc->getXAxis());
