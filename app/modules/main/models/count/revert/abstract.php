@@ -50,6 +50,9 @@ class Model_Main_Count_Revert_Abstract
 	 */
 	protected function _prepareSeries()
 	{
+		/**
+		 * @var Lib_Main_Serie_List[] $counted
+		 */
 		$list = new Lib_Main_Serie_List();
 		$counted = $this->_session->get('decompose');
 		$list->setXAxis($counted[0]->getXaxis());
@@ -68,7 +71,8 @@ class Model_Main_Count_Revert_Abstract
 
 			if ($bear_serie->hasLinearParts())
 			{
-				$coef = $coef - $bear_serie->getNextLinePartValue();
+				$sec = $bear_serie->getNextLinePartValue($coef);
+				$coef = $coef - $sec;//$bear_serie->getNextLinePartValue($coef);
 			}
 
 			$serie = new Lib_Main_Serie();

@@ -67,11 +67,40 @@ $(document).ready(function() {
 	});
 
 	/**
-	 *
+	 * Обработчик нажатия кнопки "Далее" в диалоге выбора линейных
+	 * участков для ручного режима
 	 */
 	linear_dialog.on('click', '#send-linears', function(event) {
 		event.preventDefault();
 		getExcluded();
+	});
+
+	/**
+	 * Обработчик переключателя продолжения рассчетов для ручного режима
+	 */
+	linear_dialog.on('switch-change', '#toggle_continue', function (event, data) {
+		switchContinueDecomposition(data.value);
+	});
+
+	/**
+	 * Обрабочик нажатия на чекбокс при ручном режиме
+	 */
+	linear_dialog.on('change', '.counted-linear-values input[type="checkbox"]', function(event){
+		var elem = $(this);
+		var selected = elem.closest('.counted-linear-values').find('input[type="checkbox"]:checked');
+
+		if (selected.length > 2)
+		{
+			var length = selected.length;
+			selected.each(function() {
+				var myself = $(this);
+				if (myself.attr('id') != elem.attr('id') && length > 2)
+				{
+					myself.prop('checked', false);
+					length--;
+				}
+			});
+		}
 	});
 });
 
@@ -145,12 +174,14 @@ function getNextManual()
 				height: 585
 			});
 			linears_dialog.find('#linear-tabs').tabs();
+			linears_dialog.find('[type=checkbox]').wrap('<div class="switch" data-on-label="Да" data-off-label="Нет"/>').parent().bootstrapSwitch();
+			switchContinueDecomposition($('#continue_decomposition').is(':checked'));
 		}
 	}).ajaxRequest('query').ajaxRequest('destroy');
 }
 
 /**
- *
+ * Перейти к расчету следующего шага в автоматическом режиме
  */
 function getNextAutomatic()
 {
@@ -214,7 +245,8 @@ function getFinalData() {
 }
 
 /**
- *
+ * Функция-обработчик нажатия кнопки "Далее" в диалоге выбора
+ * линейных участков для ручного режима
  */
 function getExcluded()
 {
@@ -239,10 +271,11 @@ function getExcluded()
 			switchToLastTab();
 			$('.main-log').append(data.response.log);
 
-			if (!data.response.can_continue) {
+			if (!data.response.can_continue || !$('#continue_decomposition').parent().bootstrapSwitch('status')) {
 				getFinalData();
 			} else {
-				confirmNextStep();
+				//confirmNextStep();
+				getNextStep();
 			}
 		}
 	}).ajaxRequest('query').ajaxRequest('destroy');
@@ -254,4 +287,35 @@ function getExcluded()
 function switchToLastTab()
 {
 	$('#tabs').tabs({active: $('#tabs .tabs-list li').length - 1});
+}
+
+/**
+ * Функция-обработчик переключателя продолжения
+ * рассчетов для ручного режима
+ * @param value	Включен/выключен переключатель
+ */
+function switchContinueDecomposition(value)
+{
+	var form = $('#linears-form');
+	switch (value) {
+		case true :
+			form.find('.counted-linear-values input[type="checkbox"]').each(function(){
+				var el = $(this);
+				if (el.val() == 'manual') return;
+				el.attr('type', 'radio');
+				el.attr('name', el.attr('orig_name'));
+			});
+			$('.second_manual_value').hide();
+			break;
+		case false :
+			form.find('.counted-linear-values input[type="radio"]').each(function(idx){
+				var el = $(this);
+				if (el.val() == 'manual') return;
+				el.attr('type', 'checkbox');
+				el.attr('orig_name', el.attr('name'));
+				el.attr('name', el.attr('name')+'['+idx+']');
+			});
+			$('.second_manual_value').show();
+			break;
+	}
 }

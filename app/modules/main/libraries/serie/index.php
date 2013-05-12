@@ -370,23 +370,37 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	}
 
 	/**
-	 * @return int
+	 * @param float	$prev_val
+	 * @return int	float
 	 * @throws MLib_Exception_BadUsage
 	 */
-	public function getNextLinePartValue()
+	public function getNextLinePartValue($prev_val)
 	{
 		if ($this->_linear_parts === null)
 		{
 			throw new MLib_Exception_BadUsage('Сначала линейные участки надо рассчитать');
 		}
 
+		$buf_value = null;
+
 		foreach ($this->_linear_parts as $val)
 		{
-			if ($val['selected'] == true) continue;
-			return $val['average'];
+			if ($val['selected'] == true)
+			{
+				if ($val['average'] != $prev_val)
+				{
+					return $val['average'];
+				}
+				else
+				{
+					continue;
+				}
+			}
+
+			if (is_null($buf_value)) $buf_value = $val['average'];
 		}
 
-		return 1;
+		return !is_null($buf_value) ? $buf_value : 1;
 	}
 
 	/**

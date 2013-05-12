@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Сибов Александр<sib@avantajprim.com>
+ * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 class Model_Main_Count_Exclude
 {
@@ -92,44 +92,13 @@ class Model_Main_Count_Exclude
 	{
 		$this->_getPrevCalc();
 
-		foreach ($this->_prev_calc as $key => $serie)
+		$lib_select_line = new Lib_Main_Manual_Form($this->_prev_calc, $this->_form_data);
+		$lib_select_line->prepare();
+
+		foreach ($this->_prev_calc as $serie)
 		{
-			$this->_setSelectedLinePart($serie, $key);
 			$serie->excludeDenominator()->filter($this->_filter);
 		}
-	}
-
-	/**
-	 * @param Lib_Main_Serie	$serie
-	 * @param integer			$key
-	 */
-	protected function _setSelectedLinePart(Lib_Main_Serie $serie, $key)
-	{
-		$idx = setif(setif($this->_form_data, 'serie_line'), $key, 0);
-		$line_parts = $serie->getLineParts();
-
-		if ($idx == 'manual' && is_numeric(setif(setif($this->_form_data, 'serie_line_manual_value'), $key)))
-		{
-			$value = setif(setif($this->_form_data, 'serie_line_manual_value'), $key);
-
-			array_unshift($line_parts, array(
-				'value'		=> $value,
-				'average'	=> $value,
-				'start'		=> 0,
-				'end'		=> 0,
-				'count'		=> 0,
-				'selected'	=> true
-			));
-		}
-		else
-		{
-			foreach (array_keys($line_parts) as $line_key)
-			{
-				$line_parts[$line_key]['selected'] = ($line_key == $idx) ? true : false;
-			}
-		}
-
-		$serie->setLineParts($line_parts);
 	}
 
 	/**

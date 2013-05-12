@@ -99,13 +99,15 @@ class Controller_Main_Decompose extends MLib_Controller_Frontend
 			return MLib_Ajax::instance()->setException($ex);
 		}
 
+		$can_continue = ($model->getSeriesCount() > 1) ? true : false;
+		$this->view->assign('can_continue', $can_continue);
 		$this->view->assign('list', $model->getSeriesList());
 
 		return MLib_Ajax::instance()->setSuccess(array(
 			'message'		=> 'Данные шага вычисления #'.$model->getStep().' успешно получены',
 			'html'			=> $html,
 			'step'			=> $model->getStep(),
-			'can_continue'	=> ($model->getSeriesCount() > 1) ? true : false,
+			'can_continue'	=> $can_continue,
 			'linears'		=> $this->view->fetch('decompose/view/result/manual_linear.tpl')
 		));
 	}

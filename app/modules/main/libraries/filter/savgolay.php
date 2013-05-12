@@ -1,7 +1,7 @@
 <?php
 /**
  * Фильтр Савицкого-Голея
- * @author Сибов Александр<sib@avantajprim.com>
+ * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 class Lib_Main_Filter_SavGolay extends Lib_Main_Filter_Abstract
 {

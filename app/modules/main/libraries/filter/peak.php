@@ -1,7 +1,7 @@
 <?php
 /**
  * Краткое описание назначения класса
- * @author Сибов Александр<sib@avantajprim.com>
+ * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 class Lib_Main_Filter_Peak extends Lib_Main_Filter_Abstract
 {
@@ -42,7 +42,7 @@ class Lib_Main_Filter_Peak extends Lib_Main_Filter_Abstract
 
 			if (abs(($val - $avg) / $avg) > 20)
 			{
-				$data[$key] = $avg; 
+				$data[$key] = $avg;
 			}
 		}
 
