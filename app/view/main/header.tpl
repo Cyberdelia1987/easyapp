@@ -11,7 +11,8 @@
 	<script type="text/javascript" src="{public}js/plugins/fileinput.js"></script>
 
 	<link href="{public}js/jquery/ui/css/smoothness/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
-	<link href="{public}css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+	<!--link href="{public}css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /-->
+	<link href="{public}css/fbootstrapp.min.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="{public}css/styles.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="{public}css/fileinput.css" media="screen" rel="stylesheet" type="text/css" />
 	<!-- Подключение плагина Noty -->
@@ -33,3 +34,4 @@
 </head>
 <body>
 	{$topnav}
+	<section>

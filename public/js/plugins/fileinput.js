@@ -4,7 +4,7 @@ $(document).ready(function(){
 		elem.wrap('<div class="file-input-wrapper" />');
 		var wrapper = elem.parent();
 		var fileName = $('<div class="file-name-holder"><span class="text"></span></div>').css('display', 'none').attr('id', elem.attr('id'));
-		var button = $('<div class="file-button btn btn-inverse">Выберите файл</div>');
+		var button = $('<div class="file-button btn primary">Выберите файл</div>');
 		var blocker = $('<div class="file-input-blocker" />');
 		var fileIcon = $('<div/>');
 		fileName.prepend(fileIcon);

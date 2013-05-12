@@ -1,13 +1,8 @@
-<div class="navbar navbar-inverse navbar-static-top">
-	<div class="navbar-inner">
-		<div class="container">
-			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+<div class="topbar navbar-static-top">
+	<div class="topbar-inner">
+		<div class="container canvas">
 			<a class="brand" href="/">Метод Аленцева-Фока</a>
-			<div class="nav-collapse collapse">
+			<div class="container canvas">
 				<ul class="nav">
 					{foreach from=$topnav_config item="one"}
 						<li {if $one.active}class="active"{/if}><a href="{$one.url}">{$one.title}</a></li>

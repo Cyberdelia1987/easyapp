@@ -22,7 +22,7 @@ $(document).ready(function() {
 				preferencesDialog.dialog({
 					modal: true,
 					width: 600,
-					height: 450
+					height: 320
 				});
 				preferencesDialog.find('[type=checkbox]').wrap('<div class="switch" data-on-label="Да" data-off-label="Нет"/>').parent().bootstrapSwitch();
 			}
@@ -171,7 +171,7 @@ function getNextManual()
 			linears_dialog.html(data.response.linears);
 			linears_dialog.dialog({
 				width: 600,
-				height: 585
+				height: 480
 			});
 			linears_dialog.find('#linear-tabs').tabs();
 			linears_dialog.find('[type=checkbox]').wrap('<div class="switch" data-on-label="Да" data-off-label="Нет"/>').parent().bootstrapSwitch();

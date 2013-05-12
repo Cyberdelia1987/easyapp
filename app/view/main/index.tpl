@@ -1,8 +1,8 @@
 {include file='main/header.tpl'}
-<div class="container">
+<div class="container canvas">
 	<h2>Этап 1: выбор или загрузка файла</h2><br/>
-	<div class="row-fluid nav">
-		<div class="span6 grey-block">
+	<div class="row">
+		<div class="span6 grey-block grey-block-left">
 			<h4>Загрузка файла с исходными данными</h4>
 			<p>Вы можете загрузить новый файл для анализа, либо выбрать ранее загруженный файл из списка справа.</p>
 			<p>Загружаемый файл будет преобразован в необходимый формат для дальнейшей обработки.</p>
@@ -16,18 +16,18 @@
 						</td>
 						<td>
 							<div class="controls right" style="text-align: right;">
-								<button type="submit" class="btn btn-primary">Загрузить</button>
+								<button type="submit" class="btn">Загрузить</button>
 							</div>
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
-		<div class="span6 grey-block">
+		<div class="span6 grey-block grey-block-right">
 			<h5>Ранее загруженные файлы:</h5>
 			<p>Щелкните по названию файла для перехода к разложению</p>
 			<hr/>
-			<div class="well file-list">
+			<div class="file-list">
 				{$list_model->get()}
 			</div>
 		</div>

@@ -1,54 +1,56 @@
 {include file='main/header.tpl'}
 <div class="side-margins">
-	<div class="content">
-		<div class="navbar controls">
-			<div class="navbar-inner">
+	<div class="topbar-wrapper">
+		<div class="topbar controls">
+			<div class="topbar-inner">
+				<div class="container">
 				<a class="brand" href="#">Управление</a>
-				<ul class="nav">
-					<li class="divider-vertical"></li>
-					<li><span class="btn-group">
-						<button id="calculate-button" class="btn btn-primary">Рассчитать</button>
-					</span></li>
-					<li class="divider-vertical"></li>
-					<li><span class="btn-group">
-						<button id="preferences-button" class="btn btn-inverse">Настройки</button>
-					</span></li>
-					<li class="divider-vertical"></li>
-					<li>
-						<form id="switch_mode_form" method="post" enctype="application/x-www-form-urlencoded" style="margin:0;">
-							<span style="display: inline-block; margin-top: 5px;" >
-								<label for="manual_mode_switcher" style="float: left; margin: 5px 20px 0 0;">Ручной режим: </label>
-								<input name="manual_mode_switcher" type="hidden" value="0">
-								<span style="float: left;" class="switch" id="toggle-manual" data-on-label="Да" data-off-label="Нет">
-									<input id="manual_mode_switcher" name="manual_mode_switcher" type="checkbox" value="1" {if $manual_mode}checked="checked" {/if}>
+					<ul class="nav">
+						<li class="divider-vertical"></li>
+						<li><span class="btn-group">
+							<button id="calculate-button" class="btn btn-primary">Рассчитать</button>
+						</span></li>
+						<li class="divider-vertical"></li>
+						<li><span class="btn-group">
+							<button id="preferences-button" class="btn btn-inverse">Настройки</button>
+						</span></li>
+						<li class="divider-vertical"></li>
+						<li>
+							<form id="switch_mode_form" method="post" enctype="application/x-www-form-urlencoded" style="margin:0;">
+								<span style="display: inline-block; padding: 0 10px;" >
+									<label for="manual_mode_switcher" style="float: left; margin: 2px 20px 0 0; color: #ffffff;">Ручной режим: </label>
+									<input name="manual_mode_switcher" type="hidden" value="0">
+									<span style="float: left;" class="switch" id="toggle-manual" data-on-label="Да" data-off-label="Нет">
+										<input id="manual_mode_switcher" name="manual_mode_switcher" type="checkbox" value="1" {if $manual_mode}checked="checked" {/if}>
+									</span>
 								</span>
-							</span>
-						</form>
-					</li>
-					<li class="divider-vertical"></li>
-					<li class="pull-right"><span class="btn-group">
-						<button class="btn btn-primary" style="float: right;" onclick="window.location.reload();">Очистить данные вычислений</button>
-					</span></li>
-				</ul>
-			</div>
-		</div>
-		<div class="tabs-container">
-			<div id="tabs">
-				<ul class="tabs-list">
-					<li><a href="#tabs-0">Основные данные</a></li>
-				</ul>
-				<div id="tabs-0">
-					{$display_data}
+							</form>
+						</li>
+						<li class="divider-vertical"></li>
+						<li class="pull-right"><span class="btn-group">
+							<button class="btn btn-primary" style="float: right;" onclick="window.location.reload();">Очистить данные вычислений</button>
+						</span></li>
+					</ul>
 				</div>
 			</div>
 		</div>
-		<fieldset>
-			<legend>Лог работы</legend>
-			<div class="main-log grey-block">
-
-			</div>
-		</fieldset>
 	</div>
+	<div class="tabs-container">
+		<div id="tabs">
+			<ul class="tabs-list">
+				<li><a href="#tabs-0">Основные данные</a></li>
+			</ul>
+			<div id="tabs-0">
+				{$display_data}
+			</div>
+		</div>
+	</div>
+	<fieldset>
+		<legend>Лог работы</legend>
+		<div class="main-log grey-block">
+
+		</div>
+	</fieldset>
 </div>
 
 <div id="preferences-dialog" title="Настройки декомпозиции"></div>

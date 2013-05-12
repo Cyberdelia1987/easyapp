@@ -1,8 +1,8 @@
 <div class="row-fluid">
-	<div class="span8 grey-block main-chart-wrapper">
+	<div class="span-8 grey-block main-chart-wrapper">
 		<div id="chart-display-main" class="chart-block"></div>
 	</div>
-	<div class="span4 grey-block table-data">
+	<div class="span-4 grey-block table-data">
 		<h4>Таблица исходных данных</h4>
 		<table class="table table-bordered">
 			<thead>
