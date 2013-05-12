@@ -11,7 +11,7 @@ class Model_Main_Count_Input
 	protected $_file_name = '';
 
 	/**
-	 * Массив объектов данных столбцов
+	 * Массив объектов данных рядов
 	 * @var Lib_Main_Serie_List
 	 */
 	protected $_series_list;
@@ -70,7 +70,7 @@ class Model_Main_Count_Input
 	}
 
 	/**
-	 * Получение масива объектов столбцов данных
+	 * Получение масива объектов рядов данных
 	 * @return mixed
 	 */
 	protected function _getObjectsArray()

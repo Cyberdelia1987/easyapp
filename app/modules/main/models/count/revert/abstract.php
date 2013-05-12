@@ -15,7 +15,7 @@ class Model_Main_Count_Revert_Abstract
 	protected $_session;
 
 	/**
-	 * Список столбцов данных
+	 * Список рядов данных
 	 * @var Lib_Main_Serie_List
 	 */
 	protected $_series_list;

@@ -1,11 +1,12 @@
 <?php
 /**
+ * Основной класс ряда с присущей функциональностью
  * @author Сибов Александр<cyberdelia1987@gmail.com>
  */
 class Lib_Main_Serie extends Lib_Main_ArrayAccess
 {
 	/**
-	 * Заголовок столбца
+	 * Заголовок ряда
 	 * @var string
 	 */
 	protected $_caption = '';
@@ -23,12 +24,13 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	protected $_denominator = null;
 
 	/**
-	 * Массив линейных участков столбца данных
+	 * Массив линейных участков ряда данных
 	 * @var array|null
 	 */
 	protected $_linear_parts = null;
 
 	/**
+	 * Объект списка рядов, к которому принадлежит текущий ряд
 	 * @var Lib_Main_Serie_List|Lib_Main_Serie[]
 	 */
 	protected $_list;
@@ -82,7 +84,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	{
 		if (!is_string($caption))
 		{
-			throw new MLib_Exception_WrongArgument('Кто такой умный, что решил в заголовок столбца передать не строку?');
+			throw new MLib_Exception_WrongArgument('Кто такой умный, что решил в заголовок ряда передать не строку?');
 		}
 
 		$this->_caption = $caption;
@@ -90,7 +92,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	}
 
 	/**
-	 * Получение заголовка столбца
+	 * Получение заголовка ряда
 	 * @return string
 	 */
 	public function getCaption()
@@ -108,7 +110,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	{
 		if (!$serie instanceof Lib_Main_Serie)
 		{
-			throw new MLib_Exception_BadUsage('Передан неверный объект столбца даных');
+			throw new MLib_Exception_BadUsage('Передан неверный объект ряда даных');
 		}
 
 		$this->_numerator = $serie;
@@ -134,7 +136,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	{
 		if (!$serie instanceof Lib_Main_Serie)
 		{
-			throw new MLib_Exception_BadUsage('Передан неверный объект столбца даных');
+			throw new MLib_Exception_BadUsage('Передан неверный объект ряда даных');
 		}
 
 		$this->_denominator = $serie;
@@ -161,7 +163,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	{
 		if (sizeof($this->_numerator) != sizeof($this->_denominator))
 		{
-			throw new MLib_Exception_WrongArgument('Количество данных в делимом столбце не равно количеству данных в столбце-делителе');
+			throw new MLib_Exception_WrongArgument('Количество данных в делимом ряду не равно количеству данных в ряду-делителе');
 		}
 
 		$prev_value = $this->_denominator[0] == 0 ? 0 : round($this->_numerator[0] / $this->_denominator[0], 5);
@@ -186,6 +188,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	}
 
 	/**
+	 * Анализ ряда на линеные участки
 	 * @param float $max_spread_percent
 	 * @param int $max_dots_per_jump
 	 * @return $this
@@ -284,7 +287,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	}
 
 	/**
-	 * Полуение линейных участков
+	 * Получение линейных участков
 	 * @return array|null
 	 * @throws MLib_Exception_BadUsage
 	 */
@@ -308,6 +311,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	}
 
 	/**
+	 * Проверить, если у ряда есть рассчитанные линейные участки
 	 * @return bool
 	 */
 	public function hasLinearParts()
@@ -370,6 +374,7 @@ class Lib_Main_Serie extends Lib_Main_ArrayAccess
 	}
 
 	/**
+	 * Получение следующего коэффициента после основного для обратного шага
 	 * @param float	$prev_val
 	 * @return int	float
 	 * @throws MLib_Exception_BadUsage

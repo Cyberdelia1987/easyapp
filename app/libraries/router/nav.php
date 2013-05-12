@@ -39,7 +39,7 @@ class MLib_Router_Nav extends MLib_Base_Singleton
 	}
 
 	/**
-	 * Обработка столбца плагином
+	 * Обработка ряда плагином
 	 * @param $row
 	 */
 	protected function _passThroughPlugin(&$row)

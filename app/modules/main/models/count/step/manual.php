@@ -17,7 +17,7 @@ class Model_Main_Count_Step_Manual //extends Model_Main_Count_Step_Abstract
 	protected $_session;
 
 	/**
-	 * Список столбцов данных
+	 * Список рядов данных
 	 * @var Lib_Main_Serie_List|Lib_Main_Serie[]
 	 */
 	protected $_series_list;
@@ -68,7 +68,7 @@ class Model_Main_Count_Step_Manual //extends Model_Main_Count_Step_Abstract
 	}
 
 	/**
-	 * Получение количества столбцов в результате рассчета
+	 * Получение количества рядов в результате рассчета
 	 * @return int
 	 */
 	public function getSeriesCount()
@@ -85,7 +85,7 @@ class Model_Main_Count_Step_Manual //extends Model_Main_Count_Step_Abstract
 	}
 
 	/**
-	 * Рассчет данных по столбцам
+	 * Рассчет данных по рядам
 	 */
 	protected function _countSeries()
 	{
@@ -108,15 +108,15 @@ class Model_Main_Count_Step_Manual //extends Model_Main_Count_Step_Abstract
 
 			$new_serie = new Lib_Main_Serie();
 			$new_serie
-			->setList($series_list)
-			->setCaption('f'.$key.sprintf("%''".$this->getStep()."s",  ''))
-			->setNumerator($serie)
-			->setDenominator($first_serie)
-			->divide()
-			->analyzeLineParts(
+				->setList($series_list)
+				->setCaption('f'.$key.sprintf("%''".$this->getStep()."s",  ''))
+				->setNumerator($serie)
+				->setDenominator($first_serie)
+				->divide()
+				->analyzeLineParts(
 					Model_Main_Decompose_Preferences::instance()->getValue('spread_percent'),
 					Model_Main_Decompose_Preferences::instance()->getValue('dots_per_jump'))
-			->filter($this->_filter);
+				->filter($this->_filter);
 
 			$series_list[] = $new_serie;
 		}

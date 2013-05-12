@@ -76,9 +76,9 @@ class Model_Main_Input_Files_Parse
 
 	/**
 	 * Раскидываем все это дело по объектам:
-	 * - Столбец значений длин волн (по оси X)
-	 * - Столбцы значений по оси Y
-	 * - Объект заголовков всего этого дела (хотя, может, каждый столбец будет иметь свой заголовок)
+	 * - Ряд значений длин волн (по оси X)
+	 * - Ряды значений по оси Y
+	 * - Объект заголовков всего этого дела (хотя, может, каждый ряд будет иметь свой заголовок)
 	 * @param $data
 	 * @return array|bool
 	 * @throws MLib_Exception_BadUsage
@@ -94,7 +94,7 @@ class Model_Main_Input_Files_Parse
 		$captions = array_shift($data);
 		$tmp = array();
 
-		// Извлечение заголовков и создание объектов под каждый столбец с данными
+		// Извлечение заголовков и создание объектов под каждый ряд с данными
 		foreach ($captions as $key => $value)
 		{
 			$object = ($key == 0) ? new Lib_Main_Serie_XAxis() : new Lib_Main_Serie();
@@ -111,7 +111,7 @@ class Model_Main_Input_Files_Parse
 				$cell_value = trim($cell_value);
 				if (!is_numeric($cell_value))
 				{
-					throw new MLib_Exception_WrongArgument('Значения столбцов, переданных в файле не являются числом. Обработка файла прекращена');
+					throw new MLib_Exception_WrongArgument('Значения рядов, переданных в файле не являются числом. Обработка файла прекращена');
 				}
 				$object = $tmp[$key];
 				$object[] = floatval($cell_value);

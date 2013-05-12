@@ -69,7 +69,7 @@ class Model_Main_Count_Exclude
 	}
 
 	/**
-	 * Получение количества столбцов в результате рассчета
+	 * Получение количества рядов в результате рассчета
 	 * @return int
 	 */
 	public function getSeriesCount()
@@ -86,7 +86,7 @@ class Model_Main_Count_Exclude
 	}
 
 	/**
-	 * Рассчет данных по столбцам
+	 * Рассчет данных по рядам
 	 */
 	protected function _countSeries()
 	{

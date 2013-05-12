@@ -6,7 +6,7 @@ class Lib_Main_ArrayAccess implements ArrayAccess, Iterator, Countable
 {
 	protected $_position = 0;
 	/**
-	 * Данные столбца
+	 * Данные ряда
 	 * @var array|null
 	 */
 	protected $_data = array();
