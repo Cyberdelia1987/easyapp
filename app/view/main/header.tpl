@@ -5,14 +5,13 @@
 	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 	<script type="text/javascript" src="{public}js/jquery/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="{public}js/jquery/ui/js/jquery-ui-1.10.2.custom.min.js"></script>
-	<script type="text/javascript" src="{public}js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="{public}js/jquery/ui/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<!--script type="text/javascript" src="{public}js/bootstrap.min.js"></script-->
 	<script type="text/javascript" src="{public}js/highcharts.js"></script>
 	<script type="text/javascript" src="{public}js/plugins/fileinput.js"></script>
 
 	<link href="{public}js/jquery/ui/css/smoothness/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="{public}css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
-	<link href="{public}css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="{public}css/styles.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="{public}css/fileinput.css" media="screen" rel="stylesheet" type="text/css" />
 	<!-- Подключение плагина Noty -->
