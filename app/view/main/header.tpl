@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>Пример проекта</title>
+	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
 	<script type="text/javascript" src="{public}js/jquery/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="{public}js/jquery/ui/js/jquery-ui-1.10.2.custom.min.js"></script>
 	<script type="text/javascript" src="{public}js/bootstrap.min.js"></script>
