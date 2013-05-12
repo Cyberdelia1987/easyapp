@@ -9,7 +9,7 @@ body { font-size: 12px; }
 .file-list li { position: relative; width: 100%; }
 .file-list li a { border: solid #ddd; border-width: 1px 0; margin-top: -1px; padding: 2px; }
 .file-list .ui-icon { float: left; margin: 7px 5px 0 0; }
-.file-list .nav { margin: 0; }
+.file-list .nav { margin: 0; width: 100%; }
 .clearfix { clear: both; overflow: hidden; }
 .side-margins { margin: -10px 10px 0 10px; min-width: 1000px; }
 .table-data { height: 500px; overflow: scroll; }
