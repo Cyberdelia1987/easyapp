@@ -8,7 +8,7 @@
 					<ul class="nav">
 						<li class="divider-vertical"></li>
 						<li><span class="btn-group">
-							<button id="calculate-button" class="btn btn-primary">Рассчитать</button>
+							<button id="calculate-button" class="btn">Рассчитать</button>
 						</span></li>
 						<li class="divider-vertical"></li>
 						<li><span class="btn-group">
@@ -28,7 +28,7 @@
 						</li>
 						<li class="divider-vertical"></li>
 						<li class="pull-right"><span class="btn-group">
-							<button class="btn btn-primary" style="float: right;" onclick="window.location.reload();">Очистить данные вычислений</button>
+							<button class="btn" style="float: right;" onclick="window.location.reload();">Очистить данные вычислений</button>
 						</span></li>
 					</ul>
 				</div>

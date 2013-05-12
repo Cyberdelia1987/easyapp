@@ -42,6 +42,6 @@
 			<input id="continue_decomposition" name="continue_decomposition" type="checkbox" value="1" {if $can_continue}checked="checked"{else}disabled="disabled"{/if}>
 		</span>
 	</span>
-	<button id="send-linears" type="submit" class="btn btn-primary pull-right">Далее</button>
+	<button id="send-linears" type="submit" class="btn primary pull-right">Далее</button>
 </div>
 </form>
