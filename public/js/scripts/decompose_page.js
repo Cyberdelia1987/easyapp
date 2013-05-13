@@ -84,7 +84,7 @@ $(document).ready(function() {
 	/**
 	 * Обрабочик нажатия на чекбокс при ручном режиме
 	 */
-	linear_dialog.on('change', '.counted-linear-values input[type="checkbox"]', function(event){
+	linear_dialog.on('change', '.counted-linear-values input[type="checkbox"]', function(){
 		var elem = $(this);
 		var selected = elem.closest('.counted-linear-values').find('input[type="checkbox"]:checked');
 
@@ -123,14 +123,14 @@ function confirmNextStep()
 		type: 'information',
 		modal: true,
 		buttons:  [{
-			addClass: 'btn btn-primary',
+			addClass: 'btn primary',
 			text: 'Да',
 			onClick: function() {
 				getNextStep();
 				confirm.close();
 			}
 		}, {
-			addClass: 'btn btn-danger',
+			addClass: 'btn',
 			text: 'Нет',
 			onClick: function() {
 				getFinalData();
@@ -145,7 +145,7 @@ function confirmNextStep()
  */
 function getNextManual()
 {
-	var button = $('#calculate-button')
+	var button = $('#calculate-button');
 	button.ajaxRequest({
 		url: '/decompose/getDividedManual/',
 		onSuccess: function(data) {
@@ -282,7 +282,8 @@ function getExcluded()
  */
 function switchToLastTab()
 {
-	$('#tabs').tabs({active: $('#tabs .tabs-list li').length - 1});
+	var tabs = $('#tabs');
+	tabs.tabs({active: tabs.find('.tabs-list li').length - 1});
 }
 
 /**
@@ -293,6 +294,7 @@ function switchToLastTab()
 function switchContinueDecomposition(value)
 {
 	var form = $('#linears-form');
+	var second_value = $('.second_manual_value').hide();
 	switch (value) {
 		case true :
 			form.find('.counted-linear-values input[type="checkbox"]').each(function(){
@@ -301,7 +303,7 @@ function switchContinueDecomposition(value)
 				el.attr('type', 'radio');
 				el.attr('name', el.attr('orig_name'));
 			});
-			$('.second_manual_value').hide();
+			second_value.hide();
 			break;
 		case false :
 			form.find('.counted-linear-values input[type="radio"]').each(function(idx){
@@ -311,7 +313,7 @@ function switchContinueDecomposition(value)
 				el.attr('orig_name', el.attr('name'));
 				el.attr('name', el.attr('name')+'['+idx+']');
 			});
-			$('.second_manual_value').show();
+			second_value.show();
 			break;
 	}
 }
