@@ -11,7 +11,7 @@ $(document).ready(function() {
 			type: 'information',
 			modal: true,
 			buttons:  [{
-				addClass: 'btn btn-primary',
+				addClass: 'btn primary',
 				text: 'Да',
 				onClick: function() {
 					$(this).ajaxRequest({
@@ -25,7 +25,7 @@ $(document).ready(function() {
 					confirm.close();
 				}
 			}, {
-				addClass: 'btn btn-danger',
+				addClass: 'btn danger',
 				text: 'Отмена',
 				onClick: function() { confirm.close(); }
 			}]

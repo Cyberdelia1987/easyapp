@@ -6,6 +6,7 @@ var can_continue = true;
 $(document).ready(function() {
 	var preferencesDialog = $('#preferences-dialog');
 	var linear_dialog = $('#linear-dialog');
+
 	/**
 	 * Загрузка настроек с сервера
 	 */
@@ -19,11 +20,7 @@ $(document).ready(function() {
 					type : 'success'
 				});
 				preferencesDialog.html(data.response);
-				preferencesDialog.dialog({
-					modal: true,
-					width: 600,
-					height: 320
-				});
+				preferencesDialog.modal({backdrop: true, keyboard: true, show: true});
 				preferencesDialog.find('[type=checkbox]').wrap('<div class="switch" data-on-label="Да" data-off-label="Нет"/>').parent().bootstrapSwitch();
 			}
 		});
@@ -44,7 +41,8 @@ $(document).ready(function() {
 					text : data.response,
 					type : 'success'
 				});
-				$('#preferences-dialog').dialog('close');
+				$('#preferences-dialog').modal('hide');
+				$('.modal-backdrop').remove();
 			}
 		});
 		$(this).ajaxRequest('query');
@@ -55,7 +53,8 @@ $(document).ready(function() {
 	 */
 	preferencesDialog.on('click', '#cancel-preferences', function(event) {
 		event.preventDefault();
-		$('#preferences-dialog').dialog('close');
+		$('#preferences-dialog').modal('hide');
+		$('.modal-backdrop').remove();
 	});
 
 	/**
@@ -169,12 +168,9 @@ function getNextManual()
 
 			var linears_dialog = $('#linear-dialog');
 			linears_dialog.html(data.response.linears);
-			linears_dialog.dialog({
-				width: 600,
-				height: 480
-			});
 			linears_dialog.find('#linear-tabs').tabs();
 			linears_dialog.find('[type=checkbox]').wrap('<div class="switch" data-on-label="Да" data-off-label="Нет"/>').parent().bootstrapSwitch();
+			linears_dialog.dialog({width: 500});
 			switchContinueDecomposition($('#continue_decomposition').is(':checked'));
 		}
 	}).ajaxRequest('query').ajaxRequest('destroy');

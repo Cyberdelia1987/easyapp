@@ -38,9 +38,9 @@
 	<div class="tabs-container">
 		<div id="tabs">
 			<ul class="tabs-list">
-				<li><a href="#tabs-0">Основные данные</a></li>
+				<li class="active"><a href="#tabs-0">Основные данные</a></li>
 			</ul>
-			<div id="tabs-0">
+			<div class="active" id="tabs-0">
 				{$display_data}
 			</div>
 		</div>
@@ -53,7 +53,8 @@
 	</fieldset>
 </div>
 
-<div id="preferences-dialog" title="Настройки декомпозиции"></div>
+<div id="preferences-dialog" title="Настройки декомпозиции" class="modal hide fade">
+</div>
 <div id="linear-dialog" title="Линейные участки"></div>
 
 <script type="text/javascript" src="{public}js/scripts/decompose_page.js"></script>

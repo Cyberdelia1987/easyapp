@@ -37,10 +37,11 @@ body { font-size: 12px; }
 #linears-form { margin: 0; }
 /*.form-field label { font-size: 12px !important; }*/
 .ui-dialog.ui-widget.ui-widget-content.ui-corner-all { box-shadow: 0 0 0 5px rgba(0,0,0,0.3); }
-section { padding-top: 60px; }
+section {  }
 
 .divider-vertical { height: 36px; margin: -4px 10px 0 10px; border-left: 1px solid #ddd; }
 
+#linear-dialog.ui-dialog-content { padding: 0; }
 
 .topbar-wrapper { position: relative; height: 50px; }
 .topbar-wrapper .topbar { position: absolute; z-index: auto; }
