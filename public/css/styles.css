@@ -12,10 +12,10 @@ body { font-size: 12px; }
 .file-list .nav { margin: 0; width: 100%; }
 .clearfix { clear: both; overflow: hidden; }
 .side-margins { margin: -10px 10px 0 10px; min-width: 1000px; }
-.table-data { height: 500px; overflow: scroll; }
+.table-data { height: 500px; overflow-y: scroll; }
 .table-data .xAxis { /*background: #E0E0E0;*/ }
 .controls { height: 30px; }
-.main-log { overflow: scroll; height: 200px; }
+.main-log { overflow-y: scroll; height: 200px; }
 .main-chart-wrapper { height: 500px; }
 .chart-block { height: 100%; width: 100%; }
 .preferences-form .form-field { padding: 15px 0; }
