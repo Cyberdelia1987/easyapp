@@ -13,7 +13,7 @@ body { font-size: 12px; }
 .clearfix { clear: both; overflow: hidden; }
 .side-margins { margin: -10px 10px 0 10px; min-width: 1000px; }
 .table-data { height: 500px; overflow: scroll; }
-.table-data .xAxis { background: #E0E0E0; }
+.table-data .xAxis { /*background: #E0E0E0;*/ }
 .controls { height: 30px; }
 .main-log { overflow: scroll; height: 200px; }
 .main-chart-wrapper { height: 500px; }
@@ -38,6 +38,8 @@ body { font-size: 12px; }
 /*.form-field label { font-size: 12px !important; }*/
 .ui-dialog.ui-widget.ui-widget-content.ui-corner-all { box-shadow: 0 0 0 5px rgba(0,0,0,0.3); }
 section { padding-top: 60px; }
+
+.divider-vertical { height: 36px; margin: -4px 10px 0 10px; border-left: 1px solid #ddd; }
 
 
 .topbar-wrapper { position: relative; height: 50px; }

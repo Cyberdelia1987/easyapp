@@ -4,7 +4,7 @@
 	</div>
 	<div class="span-4 grey-block table-data">
 		<h4>Таблица исходных данных</h4>
-		<table class="table table-bordered">
+		<table class="table table-bordered condensed-table zebra-striped">
 			<thead>
 				<tr>
 					<th class="xAxis">{$series_list->getXAxis()->getCaption()}</th>
@@ -16,7 +16,7 @@
 			<tbody>
 				{foreach from=$series_list->getXAxis() item="xAxisValue" key="key"}
 					<tr>
-						<td class="xAxis">{$xAxisValue}</td>
+						<th class="xAxis">{$xAxisValue}</th>
 						{foreach from=$series_list item="serie"}
 							<td>{$serie.$key}</td>
 						{/foreach}
@@ -41,9 +41,7 @@
 		});
 
 		tmp = $.extend(true, chartDefConfig, {
-			xAxis:{
-				categories:  chart_data.xAxis.data
-			},
+			xAxis: { categories:  chart_data.xAxis.data },
 			series: tmp
 		});
 

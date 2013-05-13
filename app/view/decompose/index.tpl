@@ -17,8 +17,8 @@
 						<li class="divider-vertical"></li>
 						<li>
 							<form id="switch_mode_form" method="post" enctype="application/x-www-form-urlencoded" style="margin:0;">
-								<span style="display: inline-block; padding: 0 10px;" >
-									<label for="manual_mode_switcher" style="float: left; margin: 2px 20px 0 0;">Ручной режим: </label>
+								<span style="display: inline-block;" >
+									<label for="manual_mode_switcher" style="float: left; margin-right: 10px;">Ручной режим: </label>
 									<input name="manual_mode_switcher" type="hidden" value="0">
 									<span style="float: left;" class="switch" id="toggle-manual" data-on-label="Да" data-off-label="Нет">
 										<input id="manual_mode_switcher" name="manual_mode_switcher" type="checkbox" value="1" {if $manual_mode}checked="checked" {/if}>
