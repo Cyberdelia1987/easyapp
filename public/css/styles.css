@@ -42,9 +42,21 @@ section { padding-top: 60px; }
 
 .topbar-wrapper { position: relative; height: 50px; }
 .topbar-wrapper .topbar { position: absolute; z-index: auto; }
-.topbar-wrapper .topbar-inner { padding: 0 20px; border-radius: 4px; }
 .topbar-wrapper .container { width: auto; }
-.topbar .has-switch { border-color: rgba(255, 255, 255, 0.5); }
+.topbar-wrapper .topbar-inner {
+	padding: 0 20px;
+	border-radius: 4px;
+	background-color: #e0e0e0;
+	background-image: -moz-linear-gradient(top, #fff, #e0e0e0);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#e0e0e0));
+	background-image: -webkit-linear-gradient(top, #fff, #e0e0e0);
+	background-image: -o-linear-gradient(top, #fff, #e0e0e0);
+	background-image: linear-gradient(to bottom, #fff, #e0e0e0);
+	border: 1px solid #ddd;
+	height: 37px;
+}
+.topbar-wrapper .topbar a { color: #666; }
+.topbar-wrapper .topbar .brand:hover { background-color: inherit; color: #404040; }
 
 .row-fluid { width: 100%; }
 .row-fluid:before, .row-fluid:after { display: table; line-height: 0;content: ""; }
