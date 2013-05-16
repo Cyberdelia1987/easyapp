@@ -273,7 +273,8 @@ function getExcluded()
 				//confirmNextStep();
 				getNextStep();
 			}
-		}
+		},
+		onException: function(data) { noty({text : data.response.message, type : 'error'}); }
 	}).ajaxRequest('query').ajaxRequest('destroy');
 }
 

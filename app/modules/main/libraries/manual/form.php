@@ -70,10 +70,6 @@ class Lib_Main_Manual_Form
 	protected function _parseCounted(array $line_parts, $key)
 	{
 		$settings = $this->_getSettings($key);
-		/*if (is_array($settings['indexes']) && sizeof($settings['indexes']) != 2)
-		{
-			throw new MLib_Exception_BadUsage('Количество выбранных линейных уастков не рано двум. Обработка прервана.');
-		}*/
 
 		if (!is_array($settings['indexes']))
 		{
@@ -99,11 +95,11 @@ class Lib_Main_Manual_Form
 	{
 		$settings = $this->_getSettings($key);
 
-		for ($key = sizeof($settings['manuals']) - 1; $key >=0; $key--)
+		for ($keyi = sizeof($settings['manuals']) - 1; $keyi >=0; $keyi--)
 		{
-			$man_value = $settings['manuals'][$key];
+			if ($settings['continue'] && $keyi != 0) continue;
+			$man_value = $settings['manuals'][$keyi];
 
-			if (!$settings['continue'] && $key != 0) continue;
 			if (!is_numeric($man_value))
 			{
 				throw new MLib_Exception_WrongArgument('Переданный ручной коэффициент линеного учатка не является цифровым значением: "'.$man_value.'"');
